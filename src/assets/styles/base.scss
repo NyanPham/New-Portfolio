@@ -33,7 +33,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 img, video, canvas, svg {
-    max-width: 100%;
+    // max-width: 100%;
 }
 
 a {
@@ -50,4 +50,19 @@ $green-color: #6cff8d;
 $dark-green-color: #6cff8c7a;
 $red-color: #f44336;
 $blue-color: #2169f3;
-$yellow-color: yellow;
+$yellow-color: #ffea5c;
+$darkish-blue: #060b11;
+$box-shadow-blue1: rgba(31, 38, 135, 0.27);
+$box-shadow-blue2: rgba(31, 38, 135, 0.67);
+
+/*---Predefined classes-----*/
+.section {
+    padding: 1rem;
+    overflow: hidden;
+    min-height: 100vh;
+    padding-top: 5rem;
+    z-index: 1;
+    @media (min-width: 650px) {
+        padding: 5rem;
+    }
+}
