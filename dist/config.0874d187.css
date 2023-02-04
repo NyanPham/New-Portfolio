@@ -1,0 +1,636 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap");
+@import url("https://fonts.cdnfonts.com/css/rufscript");
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+*:after, *:before {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+img, video, canvas, svg {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap");
+@import url("https://fonts.cdnfonts.com/css/rufscript");
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+*:after, *:before {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+img, video, canvas, svg {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 99;
+  background: #0b134f;
+  display: grid;
+  place-items: center;
+  font-family: "Orbitron", sans-serif;
+}
+.loading__box {
+  position: relative;
+  width: 500px;
+  height: 200px;
+  border: 3px solid #6cff8d;
+  border-top: 3px solid rgba(108, 255, 140, 0.4784313725);
+  border-bottom: 3px solid rgba(108, 255, 140, 0.4784313725);
+}
+@media (max-width: 600px) {
+  .loading__box {
+    width: 90vw;
+  }
+}
+.loading__bar {
+  width: 90%;
+  height: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ccc;
+  border-radius: 2px;
+}
+.loading__bar--inner {
+  height: 100%;
+  width: 0%;
+  border-right: 2px;
+  background: #6cff8d;
+}
+.loading__text {
+  position: relative;
+  color: #fff;
+  padding: 1rem;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 355px) {
+  .loading__text {
+    font-size: 17px;
+  }
+}
+.loading__text--dot {
+  width: 15px;
+  height: 15px;
+  margin: 0 3px;
+  border-radius: 50%;
+  background: #fff;
+  animation: pulse 1s infinite;
+}
+@keyframes pulse {
+  from {
+    opacity: 0;
+    background: #6cff8d;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.loading__text--border {
+  width: 85%;
+  height: 1px;
+  background: rgba(108, 255, 140, 0.4784313725);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.loading__counter {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+.loading__counter--number {
+  color: #6cff8d;
+}
+.loading__width_animation {
+  animation: width_animation 1s forwards;
+}
+@keyframes width_animation {
+  0% {
+    width: 85%;
+  }
+  100% {
+    width: 280px;
+  }
+}
+.loading__svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  opacity: 0;
+}
+.landing {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #111;
+  color: #fff;
+  overflow: hidden;
+  background-image: url("/3.3bd502fb.jpg");
+}
+.landing .header {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.landing .header__wrap {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60vw;
+}
+.landing .header__left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.landing .header__left li {
+  font-size: 18px;
+  font-weight: 700;
+}
+@media (max-width: 1200px) {
+  .landing .header__wrap {
+    width: 100vw;
+  }
+}
+@media (max-width: 650px) {
+  .landing .header__sm {
+    display: none;
+  }
+}
+@media (max-width: 370px) {
+  .landing .header {
+    left: 36%;
+  }
+  .landing .header__wrap {
+    gap: 20%;
+  }
+  .landing .header .coolLink[data-text=Home] {
+    display: none;
+  }
+}
+.landing .socials {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 2;
+}
+
+.scrollDown {
+  position: absolute;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 50px;
+}
+.scrollDown__wheel {
+  height: 42px;
+  width: 24px;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+.scrollDown__wheel--inner {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  animation: movingwheel 0.5s linear infinite;
+}
+@keyframes movingwheel {
+  0% {
+    top: 1px;
+  }
+  25% {
+    top: 2px;
+  }
+  50% {
+    top: 3px;
+  }
+  75% {
+    top: 2px;
+  }
+  100% {
+    top: 1px;
+  }
+}
+.scrollDown__arrows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.scrollDown__arrows .scrollDown__arrow {
+  width: 15px;
+  height: 15px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg);
+  animation: scrollAnim 1s infinite;
+}
+.scrollDown__arrows .scrollDown__arrow:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.scrollDown__arrows .scrollDown__arrow:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.scrollDown__arrows .scrollDown__arrow:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes scrollAnim {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.intro {
+  position: absolute;
+  top: 20%;
+  left: 1rem;
+  width: 100%;
+  height: 60%;
+  z-index: 2;
+  color: #fff;
+}
+.intro h4 {
+  font-size: 33px;
+}
+.intro h1 {
+  font-style: 35px;
+  width: 93%;
+  padding-top: 1rem;
+}
+@media (min-width: 600px) {
+  .intro h4 {
+    font-size: 40px;
+  }
+  .intro h1 {
+    font-size: 55px;
+  }
+}
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap");
+@import url("https://fonts.cdnfonts.com/css/rufscript");
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+*:after, *:before {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+img, video, canvas, svg {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.coolLink {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.coolLink:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.4s cubic-bezier(0.5, 0.5, 0.3, 1);
+  transform-origin: right;
+}
+.coolLink:after {
+  content: attr(data-text);
+  top: 0;
+  height: 100%;
+  position: absolute;
+  transform: translate3d(150%, 0, 0);
+  transition: transform 0.4s cubic-bezier(0.5, 0.5, 0.3, 1);
+}
+.coolLink span {
+  transition: transform 0.4s cubic-bezier(0.5, 0.5, 0.3, 1);
+}
+.coolLink:hover:before {
+  transform: scale3d(1, 1, 1);
+  transform-origin: left;
+}
+.coolLink:hover:after {
+  transform: translate3d(0, 0, 0);
+}
+.coolLink:hover span {
+  transform: translate3d(-150%, 0, 0);
+}
+
+.coolButton {
+  position: relative;
+  border: none;
+  cursor: pointer;
+  width: 175px;
+  height: 120px;
+  background: none;
+  color: #fff;
+}
+.coolButton:before, .coolButton:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.coolButton:before {
+  content: "";
+  background: #fff;
+  clip-path: path("M154.5,88.5 C131,113.5 62.5,110 30,89.5 C-2.5,69 -3.5,42 4.5,25.5 C12.5,9 33.5,-6 85,3.5 C136.5,13 178,63.5 154.5,88.5 Z");
+  transition: clip-path 0.5s cubic-bezier(0.585, 2.5, 0.645, 0.55);
+}
+.coolButton:hover:before {
+  clip-path: path("M143,77 C117,96 74,100.5 45.5,91.5 C17,82.5 -10.5,57 5.5,31.5 C21.5,6 79,-5.5 130.5,4 C182,13.5 169,58 143,77 Z");
+}
+.coolButton span {
+  mix-blend-mode: difference;
+  font-weight: 500;
+}
+.coolButton:after {
+  content: "";
+  height: 85%;
+  width: 98%;
+  top: 6px;
+  border: 1px solid #fff;
+  border-radius: 58% 42% 55% 45%/56% 45% 55% 44%;
+  transform: rotate(-20deg);
+  transition: transform 0.5s cubic-bezier(0.585, 2.5, 0.645, 0.55);
+}
+.coolButton:hover:after {
+  transform: translate3d(0, -5px, 0);
+}
+@media (max-width: 800px) {
+  .coolButton {
+    transform: scale3d(0.7, 0.7, 0.7);
+    font-size: 23px;
+  }
+}
+
+.coloredIcon {
+  fill: #fff;
+  width: 35px;
+  height: 35px;
+}
+.coloredIcon:hover {
+  animation: coloredIconAnimation 0.3s infinite;
+}
+@keyframes coloredIconAnimation {
+  0% {
+    filter: drop-shadow(5px 4px 2px #f44336);
+  }
+  25% {
+    filter: drop-shadow(-5px -6px 2px #2169f3);
+  }
+  50% {
+    filter: drop-shadow(5px -4px 2px #f44336);
+  }
+  75% {
+    filter: drop-shadow(-8px -4px 2px #2169f3);
+  }
+  100% {
+    filter: drop-shadow(-5px 0px 2px #f44336);
+  }
+}
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap");
+@import url("https://fonts.cdnfonts.com/css/rufscript");
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+*:after, *:before {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+img, video, canvas, svg {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.skills {
+  position: relative;
+  font-size: 34px;
+  height: 300px;
+  background: yellow;
+  overflow: hidden;
+  text-align: center;
+  padding-top: 1rem;
+}
+.skills__header {
+  font-weight: 400;
+}
+.skills__text {
+  position: absolute;
+  white-space: nowrap;
+}
+.skills__text--left {
+  left: 0;
+  top: 6rem;
+  animation: moveLeft 15s linear infinite;
+}
+@keyframes moveLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.skills__text--right {
+  right: 0;
+  top: 11rem;
+  animation: moveRight 15s linear infinite;
+}
+@keyframes moveRight {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(50%, 0, 0);
+  }
+}
+@media (max-width: 700px) {
+  .skills {
+    height: 200px;
+  }
+  .skills__text {
+    font-size: 20px;
+  }
+  .skills__text--left {
+    top: 5rem;
+  }
+  .skills__text--right {
+    top: 8rem;
+  }
+}
+
+/*# sourceMappingURL=/config.0874d187.css.map */

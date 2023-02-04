@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap');
+@import url('https://fonts.cdnfonts.com/css/rufscript');
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    &:after,
+    &:before {
+        box-sizing: border-box;
+    }
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+
+img, video, canvas, svg {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style-type: none;
+}
+
+// Variables 
+$green-color: #6cff8d;
+$dark-green-color: #6cff8c7a;
+$red-color: #f44336;
+$blue-color: #2169f3;
+$yellow-color: yellow;
