@@ -15,7 +15,7 @@
         position: absolute;
         top: -100%;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
         z-index: 2;
         
         &__wrap {
@@ -66,7 +66,7 @@
     .socials {
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
         bottom: -100%;
         display: flex;
         align-items: center;
@@ -79,7 +79,7 @@
     position: absolute;
     bottom: -100%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
     width: 50px;
     height: 50px;
     z-index: 1;
@@ -97,7 +97,7 @@
         &--inner {
             position: absolute;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate3d(-50%, 0, 0);
             margin-top: 5px;
             margin-left: auto;
             margin-right: auto;
@@ -105,7 +105,10 @@
             height: 4px;
             background: #fff;
             border-radius: 50%;
-            animation: movingwheel 0.5s linear infinite;
+            
+            &.in-view {
+                animation: movingwheel 0.5s linear infinite;
+            }
 
             @keyframes movingwheel {
                 0% {
@@ -142,7 +145,10 @@
             width: 1.5rem;
             height: 1.5rem;
             fill: #fff;
-            animation: scrollAnim 1s infinite;
+            
+            &.in-view {
+                animation: scrollAnim 1s infinite;
+            }
 
             &:nth-child(1) {
                 animation-delay: 0.1s;

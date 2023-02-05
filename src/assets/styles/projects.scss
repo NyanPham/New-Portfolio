@@ -91,7 +91,7 @@
     }
 
     .project .coolCircleEyeButton {
-        transform: translate(-14rem, -3rem);
+        transform: translate3d(-14rem, -3rem, 0);
     }
 }
 
@@ -121,7 +121,7 @@
 
 @media (max-width: 440px) {
     .project .coolCircleEyeButton {
-        transform: translate(0);
+        transform: translate3d(0, 0, 0);
         position: absolute;
         top: -2rem;
         right: 0;

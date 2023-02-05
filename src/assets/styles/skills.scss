@@ -19,7 +19,10 @@
         &--left {
             left: 0;
             top: 7rem;
-            animation: moveLeft 15s linear infinite;
+            
+            &.in-view {
+                animation: moveLeft 15s linear infinite;
+            }
 
             @keyframes moveLeft {
                 0%{
@@ -33,7 +36,10 @@
         &--right {
             right: 0;
             top: 12rem;
-            animation: moveRight 15s linear infinite;
+                
+            &.in-view {
+                animation: moveRight 15s linear infinite;
+            }
 
             @keyframes moveRight {
                 0%{

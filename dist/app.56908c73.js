@@ -22327,10 +22327,24 @@ require("./scrollDown.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 (0, _loader.default)();
 (0, _swiper.default)();
+RunAnimationWhenInView();
 document.addEventListener("initSmoothScroll", function (e) {
   var pageSmoothScroll = _smoothScroll.default.init(document.body, e.detail);
   pageSmoothScroll.track.xAxis.element.remove();
 });
+function RunAnimationWhenInView() {
+  var animateElemets = document.querySelectorAll("[data-animation-in-view]");
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      entry.target.classList.toggle("in-view", entry.isIntersecting);
+    });
+  }, {
+    threshold: 0.1
+  });
+  animateElemets.forEach(function (elem) {
+    return observer.observe(elem);
+  });
+}
 },{"./loader.js":"assets/js/loader.js","./swiper.js":"assets/js/swiper.js","./smoothScroll.js":"assets/js/smoothScroll.js","./faq.js":"assets/js/faq.js","./scrollDown.js":"assets/js/scrollDown.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -22356,7 +22370,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50342" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59557" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

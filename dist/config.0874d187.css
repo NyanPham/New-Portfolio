@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
-@import url("https://fonts.cdnfonts.com/css/rufscript");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -62,7 +61,6 @@ ul {
   font-weight: 700;
 }
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
-@import url("https://fonts.cdnfonts.com/css/rufscript");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -157,7 +155,7 @@ ul {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
   background: #ccc;
   border-radius: 2px;
 }
@@ -206,7 +204,7 @@ ul {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
 }
 .loading__counter {
   position: absolute;
@@ -239,12 +237,11 @@ ul {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
   width: 85%;
   opacity: 0;
 }
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
-@import url("https://fonts.cdnfonts.com/css/rufscript");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -322,7 +319,7 @@ ul {
   position: absolute;
   top: -100%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
   z-index: 2;
 }
 .landing .header__wrap {
@@ -365,7 +362,7 @@ ul {
 .landing .socials {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
   bottom: -100%;
   display: flex;
   align-items: center;
@@ -377,7 +374,7 @@ ul {
   position: absolute;
   bottom: -100%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
   width: 50px;
   height: 50px;
   z-index: 1;
@@ -395,7 +392,7 @@ ul {
 .scrollDown__wheel--inner {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
   margin-top: 5px;
   margin-left: auto;
   margin-right: auto;
@@ -403,6 +400,8 @@ ul {
   height: 4px;
   background: #fff;
   border-radius: 50%;
+}
+.scrollDown__wheel--inner.in-view {
   animation: movingwheel 0.5s linear infinite;
 }
 @keyframes movingwheel {
@@ -433,6 +432,8 @@ ul {
   width: 1.5rem;
   height: 1.5rem;
   fill: #fff;
+}
+.scrollDown__arrows .scrollDown__arrow.in-view {
   animation: scrollAnim 1s infinite;
 }
 .scrollDown__arrows .scrollDown__arrow:nth-child(1) {
@@ -497,7 +498,6 @@ ul {
   position: absolute;
 }
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
-@import url("https://fonts.cdnfonts.com/css/rufscript");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -682,12 +682,14 @@ ul {
 .coolCircleEyeButton .textcircle {
   display: block;
   width: 250px;
-  animation: rotate 7s linear infinite;
 }
 .coolCircleEyeButton .textcircle text {
   font-size: 32px;
   text-transform: uppercase;
   fill: #000;
+}
+.coolCircleEyeButton .textcircle.in-view {
+  animation: rotate 7s linear infinite;
 }
 .coolCircleEyeButton:hover text {
   font-weight: 500;
@@ -726,7 +728,7 @@ ul {
   height: 60px;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
 }
 .eye__outer, .eye__inner, .eye__lashes-up, .eye__lashes-down {
   stroke: #000;
@@ -758,7 +760,6 @@ ul {
   transition-timing-function: cubic-bezier(0.8, 1, 0.7, 1);
 }
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
-@import url("https://fonts.cdnfonts.com/css/rufscript");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -840,6 +841,8 @@ ul {
 .skills__text--left {
   left: 0;
   top: 7rem;
+}
+.skills__text--left.in-view {
   animation: moveLeft 15s linear infinite;
 }
 @keyframes moveLeft {
@@ -853,6 +856,8 @@ ul {
 .skills__text--right {
   right: 0;
   top: 12rem;
+}
+.skills__text--right.in-view {
   animation: moveRight 15s linear infinite;
 }
 @keyframes moveRight {
@@ -878,7 +883,6 @@ ul {
   }
 }
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
-@import url("https://fonts.cdnfonts.com/css/rufscript");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -945,6 +949,7 @@ ul {
   position: relative;
   background: #060b11;
   color: #fff;
+  display: none;
 }
 .reviews__header {
   display: flex;
@@ -1929,7 +1934,7 @@ button.swiper-pagination-bullet {
     font-size: 38px;
   }
   .project .coolCircleEyeButton {
-    transform: translate(-14rem, -3rem);
+    transform: translate3d(-14rem, -3rem, 0);
   }
 }
 @media (max-width: 740px) {
@@ -1954,7 +1959,7 @@ button.swiper-pagination-bullet {
 }
 @media (max-width: 440px) {
   .project .coolCircleEyeButton {
-    transform: translate(0);
+    transform: translate3d(0, 0, 0);
     position: absolute;
     top: -2rem;
     right: 0;

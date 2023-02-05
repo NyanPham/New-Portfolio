@@ -36,9 +36,25 @@ camera.position.z = 5;
 
 const count = geometry.attributes.position.count;
 const clock = new THREE.Clock();
+let bgInView = false;
+const bgObserver = new IntersectionObserver(
+    ([entry]) => {
+        bgInView = entry.isIntersecting;
+    },
+    {
+        threshold: 0.1,
+    }
+);
+bgObserver.observe(document.getElementById("home"));
 
 function animate() {
     const time = clock.getElapsedTime();
+
+    if (!bgInView) {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+        return;
+    }
 
     for (let i = 0; i < count; i++) {
         const x = geometry.attributes.position.getX(i);
