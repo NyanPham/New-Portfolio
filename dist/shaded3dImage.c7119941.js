@@ -36168,8 +36168,10 @@ module.exports = "/7.0532b546.png";
 module.exports = "/34.a9943b2a.jpg";
 },{}],"assets/images/me.jpg":[function(require,module,exports) {
 module.exports = "/me.8a0db8cf.jpg";
-},{}],"assets/images/me.png":[function(require,module,exports) {
-module.exports = "/me.b255fd5b.png";
+},{}],"assets/images/me2.jpg":[function(require,module,exports) {
+module.exports = "/me2.6e54d5e9.jpg";
+},{}],"assets/images/me3.jpg":[function(require,module,exports) {
+module.exports = "/me3.f586b418.jpg";
 },{}],"assets/js/images.js":[function(require,module,exports) {
 "use strict";
 
@@ -36186,7 +36188,8 @@ var _6 = _interopRequireDefault(require("../images/avatars/6.png"));
 var _7 = _interopRequireDefault(require("../images/avatars/7.png"));
 var _8 = _interopRequireDefault(require("../images/shapes/34.jpg"));
 var _me = _interopRequireDefault(require("../images/me.jpg"));
-var _me2 = _interopRequireDefault(require("../images/me.png"));
+var _me2 = _interopRequireDefault(require("../images/me2.jpg"));
+var _me3 = _interopRequireDefault(require("../images/me3.jpg"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var images = {
   avatar1: _.default,
@@ -36198,11 +36201,12 @@ var images = {
   avatar7: _7.default,
   bg: _8.default,
   me1: _me.default,
-  me2: _me2.default
+  me2: _me2.default,
+  me3: _me3.default
 };
 var _default = images;
 exports.default = _default;
-},{"../images/avatars/1.png":"assets/images/avatars/1.png","../images/avatars/2.png":"assets/images/avatars/2.png","../images/avatars/3.png":"assets/images/avatars/3.png","../images/avatars/4.png":"assets/images/avatars/4.png","../images/avatars/5.png":"assets/images/avatars/5.png","../images/avatars/6.png":"assets/images/avatars/6.png","../images/avatars/7.png":"assets/images/avatars/7.png","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me.png":"assets/images/me.png"}],"assets/shaders/vertex.glsl":[function(require,module,exports) {
+},{"../images/avatars/1.png":"assets/images/avatars/1.png","../images/avatars/2.png":"assets/images/avatars/2.png","../images/avatars/3.png":"assets/images/avatars/3.png","../images/avatars/4.png":"assets/images/avatars/4.png","../images/avatars/5.png":"assets/images/avatars/5.png","../images/avatars/6.png":"assets/images/avatars/6.png","../images/avatars/7.png":"assets/images/avatars/7.png","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/shaders/vertex.glsl":[function(require,module,exports) {
 module.exports = "#define GLSLIFY 1\nuniform sampler2D uTexture;\nuniform vec2 uOffset;\nvarying vec2 vUv;\n\nfloat M_PI = 3.141529;\n\nvec3 deformationCurve(vec3 position, vec2 uv, vec2 offset) \n{\n    position.x = position.x + (sin(uv.y * M_PI) * offset.x);\n    position.y = position.y + (sin(uv.x * M_PI) * offset.y);\n    return position;\n}\n\nvoid main() \n{\n    vUv = uv;\n    vec3 newPosition = deformationCurve(position, uv, uOffset);\n    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);\n}";
 },{}],"assets/shaders/fragment.glsl":[function(require,module,exports) {
 module.exports = "#define GLSLIFY 1\nuniform sampler2D uTexture;\nuniform float uAlpha;\nuniform vec2 uOffset;\nvarying vec2 vUv;\n\nvec3 rgbShift(sampler2D textureImage, vec2 uv, vec2 offset)\n{\n    float r = texture2D(textureImage, uv + offset).r;\n    vec2 gb = texture2D(textureImage, uv).gb;\n    return vec3(r, gb);\n}\n\nvoid main() \n{\n    vec3 color = rgbShift(uTexture, vUv, uOffset);\n    gl_FragColor = vec4(color, uAlpha);\n}";
@@ -36231,8 +36235,8 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 var loader = new THREE.TextureLoader();
 var texture1 = loader.load(_images.default.me1);
 var texture2 = loader.load(_images.default.me2);
-var texture3 = loader.load(_images.default.me1);
-var texture4 = loader.load(_images.default.me2);
+var texture3 = loader.load(_images.default.me3);
+var texture4 = loader.load(_images.default.me1);
 function lerp(start, end, t) {
   return start * (1 - t) + end * t;
 }
@@ -36406,7 +36410,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50859" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50342" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

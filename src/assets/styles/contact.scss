@@ -1,6 +1,6 @@
 .contact {
     position: relative;
-    background: linear-gradient(to right, #f3e5ce, #f4deb7, #f3e4ce);
+    background: linear-gradient(to right, #90cdf4, #edf2f7);
     font-family: sans-serif;
 
     &__header {
@@ -16,6 +16,7 @@
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
+        gap: 0.25rem;
 
         &-item {
             position: relative;
@@ -43,7 +44,7 @@
             position: absolute;
             width: 250px;
             height: 100px;
-            background: #f6d5a4;
+            background: #4299e1;
             border-radius: 5px;
             left: 20%;
         }

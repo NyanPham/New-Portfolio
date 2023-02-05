@@ -7,8 +7,9 @@ const loader = new THREE.TextureLoader();
 
 const texture1 = loader.load(images.me1);
 const texture2 = loader.load(images.me2);
-const texture3 = loader.load(images.me1);
-const texture4 = loader.load(images.me2);
+const texture3 = loader.load(images.me3);
+const texture4 = loader.load(images.me1);
+
 function lerp(start, end, t) {
     return start * (1 - t) + end * t;
 }

@@ -7,7 +7,8 @@ import avatar6 from "../images/avatars/6.png";
 import avatar7 from "../images/avatars/7.png";
 import bg from "../images/shapes/34.jpg";
 import me1 from "../images/me.jpg";
-import me2 from "../images/me.png";
+import me2 from "../images/me2.jpg";
+import me3 from "../images/me3.jpg";
 
 const images = {
     avatar1,
@@ -20,6 +21,7 @@ const images = {
     bg,
     me1,
     me2,
+    me3,
 };
 
 export default images;

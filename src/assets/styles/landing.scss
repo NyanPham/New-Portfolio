@@ -181,7 +181,7 @@
     height: 60%;
     z-index: 2;
     color: #fff;
-    // font-family: 'Rufscript', sans-serif;
+    font-family: 'Dancing Script', cursive;
 
     & h4 {
         font-size: 33px;
@@ -199,6 +199,15 @@
         & h1 {
             font-size: 55px;
         }
+    }
+
+    @media (max-width: 767px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        left: 0;
     }
 }
 
