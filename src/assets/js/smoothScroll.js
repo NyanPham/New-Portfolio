@@ -78,4 +78,9 @@ class AnchorPlugin extends ScrollbarPlugin {
 Scrollbar.use(AnchorPlugin);
 Scrollbar.use(DisableScrollPlugin);
 
+export function initScrollBar() {
+    let pageSmoothScroll = Scrollbar.init(document.body, options);
+    pageSmoothScroll.track.xAxis.element.remove();
+}
+
 export default Scrollbar;
