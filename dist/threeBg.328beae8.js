@@ -36245,7 +36245,7 @@ scene.add(mesh);
 camera.position.z = 5;
 var count = geometry.attributes.position.count;
 var clock = new THREE.Clock();
-var bgInView = false;
+var bgInView = true;
 var bgObserver = new IntersectionObserver(function (_ref) {
   var _ref2 = _slicedToArray(_ref, 1),
     entry = _ref2[0];
@@ -36302,7 +36302,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59557" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61206" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

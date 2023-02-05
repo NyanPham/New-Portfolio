@@ -36,7 +36,8 @@ camera.position.z = 5;
 
 const count = geometry.attributes.position.count;
 const clock = new THREE.Clock();
-let bgInView = false;
+let bgInView = true;
+
 const bgObserver = new IntersectionObserver(
     ([entry]) => {
         bgInView = entry.isIntersecting;

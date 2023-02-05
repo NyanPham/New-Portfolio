@@ -5967,15 +5967,6 @@ var _imagesloaded = _interopRequireDefault(require("imagesloaded"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var bar = document.querySelector("[data-loading-bar-inner]");
 var counter_num = document.querySelector("[data-loading-counter-number]");
-var options = {
-  damping: 0.1,
-  alwaysShowTracks: true,
-  plugins: {
-    disableScroll: {
-      direction: "x"
-    }
-  }
-};
 var c = 0;
 function StartLoading() {
   var barInterval = setInterval(function () {
@@ -6037,9 +6028,7 @@ function StartLoading() {
           bottom: "5.5rem"
         });
         setTimeout(function () {
-          document.dispatchEvent(new CustomEvent("initSmoothScroll", {
-            detail: options
-          }));
+          document.dispatchEvent(new CustomEvent("initSmoothScroll"));
         }, 2000);
       });
     }
@@ -22191,6 +22180,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+exports.initScrollBar = initScrollBar;
+exports.options = void 0;
 var _smoothScrollbar = _interopRequireWildcard(require("smooth-scrollbar"));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -22210,6 +22201,16 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var options = {
+  damping: 0.1,
+  alwaysShowTracks: true,
+  plugins: {
+    disableScroll: {
+      direction: "x"
+    }
+  }
+};
+exports.options = options;
 var DisableScrollPlugin = /*#__PURE__*/function (_ScrollbarPlugin) {
   _inherits(DisableScrollPlugin, _ScrollbarPlugin);
   var _super = _createSuper(DisableScrollPlugin);
@@ -22288,6 +22289,10 @@ var AnchorPlugin = /*#__PURE__*/function (_ScrollbarPlugin2) {
 _defineProperty(AnchorPlugin, "pluginName", "anchor");
 _smoothScrollbar.default.use(AnchorPlugin);
 _smoothScrollbar.default.use(DisableScrollPlugin);
+function initScrollBar() {
+  var pageSmoothScroll = _smoothScrollbar.default.init(document.body, options);
+  pageSmoothScroll.track.xAxis.element.remove();
+}
 var _default = _smoothScrollbar.default;
 exports.default = _default;
 },{"smooth-scrollbar":"../node_modules/smooth-scrollbar/index.js"}],"assets/js/faq.js":[function(require,module,exports) {
@@ -22321,16 +22326,17 @@ scrollDownElem.addEventListener("click", function () {
 
 var _loader = _interopRequireDefault(require("./loader.js"));
 var _swiper = _interopRequireDefault(require("./swiper.js"));
-var _smoothScroll = _interopRequireDefault(require("./smoothScroll.js"));
+var _smoothScroll = _interopRequireWildcard(require("./smoothScroll.js"));
 require("./faq.js");
 require("./scrollDown.js");
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 (0, _loader.default)();
 (0, _swiper.default)();
 RunAnimationWhenInView();
-document.addEventListener("initSmoothScroll", function (e) {
-  var pageSmoothScroll = _smoothScroll.default.init(document.body, e.detail);
-  pageSmoothScroll.track.xAxis.element.remove();
+document.addEventListener("initSmoothScroll", function () {
+  (0, _smoothScroll.initScrollBar)();
 });
 function RunAnimationWhenInView() {
   var animateElemets = document.querySelectorAll("[data-animation-in-view]");
@@ -22370,7 +22376,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59557" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61206" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
