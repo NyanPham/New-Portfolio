@@ -42,6 +42,7 @@ let barInterval = setInterval(() => {
             zIndex: 1,
             background: "transparent",
             opacity: 0.5,
+            pointerEvents: "none",
         });
         gsap.to(".loading__svg", {
             delay: 2,
@@ -93,4 +94,14 @@ reviews.map((review) => {
     }</span><span>${review.position}</span></div></div></div></div>`;
 
     swiperContainer.innerHTML += template;
+});
+
+const questions = [...document.querySelectorAll(".question")];
+questions.forEach((question) => {
+    question.addEventListener("click", () => {
+        question.classList.toggle("open");
+        questions
+            .filter((q) => q !== question)
+            .forEach((q) => q.classList.remove("open"));
+    });
 });

@@ -15303,6 +15303,12 @@ var _data = require("./data.js");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 var bar = document.querySelector(".loading__bar--inner");
 var counter_num = document.querySelector(".loading__counter--number");
 var c = 0;
@@ -15340,7 +15346,8 @@ var barInterval = setInterval(function () {
       duration: 2,
       zIndex: 1,
       background: "transparent",
-      opacity: 0.5
+      opacity: 0.5,
+      pointerEvents: "none"
     });
     _gsap.default.to(".loading__svg", {
       delay: 2,
@@ -15381,6 +15388,17 @@ _data.reviews.map(function (review) {
   var template = "<div class=\"swiper-slide\"><div class=\"review\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d=\"M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z\"/></svg><div class=\"review__card\"><div class=\"review__topborder\"></div><div class=\"review__text\"><span>".concat(review.review.substring(0, 1), "</span>").concat(review.review.substring(1, review.review.length), "</div><img src=\"").concat(review.image, "\" alt=\"\" class=\"review__img\"><div class=\"review__profile\"><span>").concat(review.name, "</span><span>").concat(review.position, "</span></div></div></div></div>");
   swiperContainer.innerHTML += template;
 });
+var questions = _toConsumableArray(document.querySelectorAll(".question"));
+questions.forEach(function (question) {
+  question.addEventListener("click", function () {
+    question.classList.toggle("open");
+    questions.filter(function (q) {
+      return q !== question;
+    }).forEach(function (q) {
+      return q.classList.remove("open");
+    });
+  });
+});
 },{"gsap":"../node_modules/gsap/index.js","swiper":"../node_modules/swiper/swiper.esm.js","./data.js":"assets/js/data.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -15406,7 +15424,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54893" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61454" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
