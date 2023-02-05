@@ -66,7 +66,6 @@ function StartLoading() {
                     delay: 3,
                     bottom: "5.5rem",
                 });
-                setBackgroundInView();
 
                 setTimeout(() => {
                     document.dispatchEvent(new CustomEvent("initSmoothScroll"));
