@@ -1935,5 +1935,175 @@ button.swiper-pagination-bullet {
   outline: 1px solid #0f0f0f;
   outline-offset: 2px;
 }
+.contact {
+  position: relative;
+  background: linear-gradient(to right, #f3e5ce, #f4deb7, #f3e4ce);
+  font-family: sans-serif;
+}
+.contact__header {
+  margin-bottom: 3rem;
+}
+@media (max-width: 1100x) {
+  .contact {
+    padding: 2rem;
+  }
+}
+.contact__profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.contact__profile-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.contact__profile-item img {
+  width: 70px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.contact__profile-col {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 17px;
+  z-index: 1;
+}
+.contact__profile-bg {
+  position: absolute;
+  width: 250px;
+  height: 100px;
+  background: #f6d5a4;
+  border-radius: 5px;
+  left: 20%;
+}
+.contact__socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  padding-bottom: 3rem;
+}
+.contact__socials {
+  font-size: 25px;
+}
+.contact__footer {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+.contact__footer-link {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+}
+@media (max-width: 900px) {
+  .contact__footer-link {
+    font-size: 14px;
+  }
+}
+
+.form__info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2.2vw;
+  font-weight: 500;
+}
+.form__info input {
+  font-size: inherit;
+  font-weight: inherit;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid #000;
+  color: #444;
+}
+.form__info input:focus {
+  outline: none;
+}
+.form__flex {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.form__flex textarea {
+  width: 70%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000;
+  font-size: 2.2vw;
+  color: #444;
+  resize: none;
+}
+.form__flex textarea:focus {
+  outline: none;
+}
+.form__flex .coolButton {
+  font-weight: 900;
+  font-size: 20px;
+}
+.form__flex .coolButton span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+.form__flex .coolButton span svg {
+  width: 15px;
+  height: 15px;
+  fill: #fff;
+}
+.form__flex .coolButton:before {
+  background: #000;
+}
+.form__flex .coolButton:after {
+  display: none;
+}
+.form__flex .coolButton:hover:before {
+  background: #fff;
+}
+
+@media (max-width: 900px) {
+  .form__flex {
+    flex-direction: column;
+  }
+  .form__flex textarea {
+    font-size: 4vw;
+  }
+  .form__info {
+    font-size: 4vw;
+  }
+  .form__info input {
+    font-size: 4vw;
+  }
+}
+@media (max-width: 800px) {
+  .contact .coolButton {
+    transform: scale3d(1, 1, 1);
+    font-size: 19px;
+  }
+}
+@media (max-width: 610px) {
+  .form__info {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 5vw;
+  }
+  .form__info input {
+    font-size: inherit;
+    width: 100%;
+  }
+  .form__flex textarea {
+    width: 100%;
+    font-size: 5vw;
+  }
+}
 
 /*# sourceMappingURL=/config.0874d187.css.map */
