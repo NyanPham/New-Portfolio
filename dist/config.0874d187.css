@@ -16,6 +16,7 @@ body {
   font-family: "Poppins", sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  height: 100vh;
 }
 
 button,
@@ -78,6 +79,7 @@ body {
   font-family: "Poppins", sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  height: 100vh;
 }
 
 button,
@@ -248,11 +250,13 @@ ul {
   background: #111;
   color: #fff;
   overflow: hidden;
-  background-image: url("/3.3bd502fb.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 .landing .header {
   position: absolute;
-  top: 1rem;
+  top: -100%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -298,7 +302,7 @@ ul {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 10rem;
+  bottom: -100%;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -307,11 +311,12 @@ ul {
 
 .scrollDown {
   position: absolute;
-  bottom: 5rem;
+  bottom: -100%;
   left: 50%;
   transform: translateX(-50%);
   width: 50px;
   height: 50px;
+  z-index: 1;
 }
 .scrollDown__wheel {
   height: 42px;
@@ -412,6 +417,10 @@ ul {
     font-size: 55px;
   }
 }
+
+.landing canvas {
+  position: absolute;
+}
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap");
 @import url("https://fonts.cdnfonts.com/css/rufscript");
 * {
@@ -430,6 +439,7 @@ body {
   font-family: "Poppins", sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  height: 100vh;
 }
 
 button,
@@ -690,6 +700,7 @@ body {
   font-family: "Poppins", sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  height: 100vh;
 }
 
 button,
@@ -809,6 +820,7 @@ body {
   font-family: "Poppins", sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  height: 100vh;
 }
 
 button,
