@@ -51,12 +51,6 @@ bgObserver.observe(document.getElementById("home"));
 function animate() {
     const time = clock.getElapsedTime();
 
-    if (!bgInView && time > 7) {
-        requestAnimationFrame(animate);
-        renderer.render(scene, camera);
-        return;
-    }
-
     for (let i = 0; i < count; i++) {
         const x = geometry.attributes.position.getX(i);
         const y = geometry.attributes.position.getY(i);
