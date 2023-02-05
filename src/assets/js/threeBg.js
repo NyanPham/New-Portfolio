@@ -48,6 +48,10 @@ const bgObserver = new IntersectionObserver(
 );
 bgObserver.observe(document.getElementById("home"));
 
+export function setBackgroundInView() {
+    bgInView = true;
+}
+
 function animate() {
     const time = clock.getElapsedTime();
 

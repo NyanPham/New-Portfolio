@@ -1,5 +1,6 @@
 import gsap from "gsap";
 import imagesLoaded from "imagesloaded";
+import { setBackgroundInView } from "./threeBg";
 
 const bar = document.querySelector("[data-loading-bar-inner]");
 const counter_num = document.querySelector("[data-loading-counter-number]");
@@ -65,6 +66,8 @@ function StartLoading() {
                     delay: 3,
                     bottom: "5.5rem",
                 });
+                setBackgroundInView();
+
                 setTimeout(() => {
                     document.dispatchEvent(new CustomEvent("initSmoothScroll"));
                 }, 2000);
