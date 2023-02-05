@@ -1,3 +1,5 @@
+@import "./base.scss";
+
 .landing {
     position: relative;
     width: 100%;
@@ -5,8 +7,6 @@
     background: #111;
     color: #fff;
     overflow: hidden;
-    // background: transparent;
-    // background-image: url('../images/shapes/3.jpg');
 
     background-size: cover;
     background-repeat: no-repeat;
@@ -83,6 +83,7 @@
     width: 50px;
     height: 50px;
     z-index: 1;
+    cursor: pointer;
 
     &__wheel {
         height: 42px;
@@ -135,13 +136,12 @@
         flex-direction: column;
         align-items: center;
         gap: 0.5rem;
+        margin-top: 0.5rem;
 
         .scrollDown__arrow {
-            width: 15px;
-            height: 15px;
-            border-right: 2px solid #fff;
-            border-bottom: 2px solid #fff;
-            transform: rotate(45deg);
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #fff;
             animation: scrollAnim 1s infinite;
 
             &:nth-child(1) {

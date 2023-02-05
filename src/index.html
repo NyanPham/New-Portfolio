@@ -11,12 +11,15 @@
     <!-- Favicon -->
 
     <script src="assets/js/config.js"></script>
+    <script type="module" src="assets/js/app.js"></script>
+    <script type="module" src="assets/js/threeBg.js"></script>
+    <script type="module" src="assets/js/shaded3dImage.js"></script>
 </head>
 <body>
     <!-- Loading -->
     <div class="loading">
         <div class="loading__box">
-            <img src="assets/images/loaders/loader15.svg" class="loading__svg">
+            <img src="assets/images/loaders/loader19.svg" class="loading__svg">
             <div class="loading__text">
                 <div class="loading__text--border loading__width_animation"></div>
                 L 
@@ -24,29 +27,27 @@
                 LOADING EXPERIENCE
             </div>
             <div class="loading__bar">
-                <div class="loading__bar--inner"></div>
+                <div class="loading__bar--inner" data-loading-bar-inner></div>
             </div>
             <div class="loading__counter">
                 <span>0%</span>
-                <div class="loading__counter--number">0%</div>
+                <div class="loading__counter--number" data-loading-counter-number>0%</div>
             </div>
         </div>
     </div>
     <!-- Landing -->
-    <section class="landing">
+    <section class="landing" id="home">
         <!-- Three js background -->
-        <div class="three_bg">
-
-        </div>
+        <div class="three_bg" data-three-bg></div>
         <!-- Header -->
         <header class="header">
             <div class="header__wrap">
                 <ul class="header__left">
-                    <li><a href="#" class="coolLink" data-text="Home"><span>Home</span></a></li>
+                    <li><a href="#home" class="coolLink" data-text="Home"><span>Home</span></a></li>
                     <li class="header__sm"><a href="#reviews" class="coolLink" data-text="Reviews"><span>Reviews</span></a></li>
-                    <li><a href="#" class="coolLink" data-text="Projects"><span>Projects</span></a></li>
+                    <li><a href="#projects" class="coolLink" data-text="Projects"><span>Projects</span></a></li>
                     <li class="header__sm"><a href="#" class="coolLink" data-text="Insights"><span>Insights</span></a></li>
-                    <li class="header__sm"><a href="#" class="coolLink" data-text="Faq"><span>Faq</span></a></li>
+                    <li class="header__sm"><a href="#faq" class="coolLink" data-text="Faq"><span>Faq</span></a></li>
                 </ul>
                 <div class="header__right">
                     <a href="#contact">
@@ -83,18 +84,18 @@
             </a>
         </div>
         <!-- Scroll down -->
-        <div class="scrollDown">
+        <div class="scrollDown" data-scroll-down>
             <div class="scrollDown__wheel">
                 <div class="scrollDown__wheel--inner"></div>
             </div>
             <div class="scrollDown__arrows">
-                <span class="scrollDown__arrow"></span>
-                <span class="scrollDown__arrow"></span>
-                <span class="scrollDown__arrow"></span>
+                <svg class="paw scrollDown__arrow" viewBox="0 0 30 31" xmlns="http://www.w3.org/2000/svg"><path d="M19.1136 26.5003C17.6386 26.7128 16.0761 25.1003 15.6261 22.8753C15.1761 20.6628 15.9886 18.6878 17.4636 18.4628C18.9261 18.2378 20.5011 19.8503 20.9636 22.0753C21.4261 24.2878 20.5886 26.2628 19.1136 26.5003ZM10.1761 26.5003C8.68863 26.2628 7.86363 24.2878 8.30113 22.0753C8.77613 19.8503 10.3386 18.2378 11.8136 18.4628C13.3011 18.6878 14.1136 20.6628 13.6511 22.8753C13.2011 25.1003 11.6386 26.7128 10.1761 26.5003ZM25.8011 20.7503C24.3761 21.3628 22.4386 20.2503 21.4261 18.3128C20.4761 16.3378 20.8011 14.2628 22.2136 13.6503C23.6261 13.0378 25.5511 14.1378 26.5386 16.1003C27.5261 18.0628 27.1761 20.1503 25.8011 20.7503ZM3.30113 20.7503C1.92613 20.1503 1.57613 18.0628 2.56363 16.1003C3.55113 14.1378 5.47613 13.0378 6.88863 13.6503C8.30113 14.2628 8.62613 16.3378 7.67613 18.3128C6.66363 20.2503 4.72613 21.3628 3.30113 20.7503ZM5.38863 7.2753C5.33863 6.1003 6.23863 4.8003 7.31363 4.3128C9.55113 3.2878 12.2011 5.4128 14.6886 5.4128C17.1761 5.4128 19.8511 3.2003 22.0511 4.3128C23.3011 4.9253 24.1636 6.5503 24.0011 7.9003C23.7761 9.7628 21.5386 10.7628 20.2136 12.1253C18.4511 13.8878 17.2011 17.2003 14.6886 17.2003C12.1886 17.2003 10.8636 13.9378 9.17613 12.1253C7.78863 10.6003 5.47613 9.3128 5.38863 7.2753Z"></path></svg>
+                <svg class="paw scrollDown__arrow" viewBox="0 0 30 31" xmlns="http://www.w3.org/2000/svg"><path d="M19.1136 26.5003C17.6386 26.7128 16.0761 25.1003 15.6261 22.8753C15.1761 20.6628 15.9886 18.6878 17.4636 18.4628C18.9261 18.2378 20.5011 19.8503 20.9636 22.0753C21.4261 24.2878 20.5886 26.2628 19.1136 26.5003ZM10.1761 26.5003C8.68863 26.2628 7.86363 24.2878 8.30113 22.0753C8.77613 19.8503 10.3386 18.2378 11.8136 18.4628C13.3011 18.6878 14.1136 20.6628 13.6511 22.8753C13.2011 25.1003 11.6386 26.7128 10.1761 26.5003ZM25.8011 20.7503C24.3761 21.3628 22.4386 20.2503 21.4261 18.3128C20.4761 16.3378 20.8011 14.2628 22.2136 13.6503C23.6261 13.0378 25.5511 14.1378 26.5386 16.1003C27.5261 18.0628 27.1761 20.1503 25.8011 20.7503ZM3.30113 20.7503C1.92613 20.1503 1.57613 18.0628 2.56363 16.1003C3.55113 14.1378 5.47613 13.0378 6.88863 13.6503C8.30113 14.2628 8.62613 16.3378 7.67613 18.3128C6.66363 20.2503 4.72613 21.3628 3.30113 20.7503ZM5.38863 7.2753C5.33863 6.1003 6.23863 4.8003 7.31363 4.3128C9.55113 3.2878 12.2011 5.4128 14.6886 5.4128C17.1761 5.4128 19.8511 3.2003 22.0511 4.3128C23.3011 4.9253 24.1636 6.5503 24.0011 7.9003C23.7761 9.7628 21.5386 10.7628 20.2136 12.1253C18.4511 13.8878 17.2011 17.2003 14.6886 17.2003C12.1886 17.2003 10.8636 13.9378 9.17613 12.1253C7.78863 10.6003 5.47613 9.3128 5.38863 7.2753Z"></path></svg>
+                <svg class="paw scrollDown__arrow" viewBox="0 0 30 31" xmlns="http://www.w3.org/2000/svg"><path d="M19.1136 26.5003C17.6386 26.7128 16.0761 25.1003 15.6261 22.8753C15.1761 20.6628 15.9886 18.6878 17.4636 18.4628C18.9261 18.2378 20.5011 19.8503 20.9636 22.0753C21.4261 24.2878 20.5886 26.2628 19.1136 26.5003ZM10.1761 26.5003C8.68863 26.2628 7.86363 24.2878 8.30113 22.0753C8.77613 19.8503 10.3386 18.2378 11.8136 18.4628C13.3011 18.6878 14.1136 20.6628 13.6511 22.8753C13.2011 25.1003 11.6386 26.7128 10.1761 26.5003ZM25.8011 20.7503C24.3761 21.3628 22.4386 20.2503 21.4261 18.3128C20.4761 16.3378 20.8011 14.2628 22.2136 13.6503C23.6261 13.0378 25.5511 14.1378 26.5386 16.1003C27.5261 18.0628 27.1761 20.1503 25.8011 20.7503ZM3.30113 20.7503C1.92613 20.1503 1.57613 18.0628 2.56363 16.1003C3.55113 14.1378 5.47613 13.0378 6.88863 13.6503C8.30113 14.2628 8.62613 16.3378 7.67613 18.3128C6.66363 20.2503 4.72613 21.3628 3.30113 20.7503ZM5.38863 7.2753C5.33863 6.1003 6.23863 4.8003 7.31363 4.3128C9.55113 3.2878 12.2011 5.4128 14.6886 5.4128C17.1761 5.4128 19.8511 3.2003 22.0511 4.3128C23.3011 4.9253 24.1636 6.5503 24.0011 7.9003C23.7761 9.7628 21.5386 10.7628 20.2136 12.1253C18.4511 13.8878 17.2011 17.2003 14.6886 17.2003C12.1886 17.2003 10.8636 13.9378 9.17613 12.1253C7.78863 10.6003 5.47613 9.3128 5.38863 7.2753Z"></path></svg>
             </div>
         </div>
     </section>
-    <section class="skills">
+    <section class="skills" id="skills">
         <div class="skills__header">My Expertise</div>
         <div class="skills__text skills__text--left">
             Web development &nbsp;&nbsp;&nbsp; Frontend&nbsp;&nbsp;&nbsp;
@@ -143,7 +144,7 @@
         <!-- Swiper -->
         <div class="swiper__wrapper">
             <div class="swiper">
-                <div class="swiper-wrapper"></div>
+                <div class="swiper-wrapper" data-swiper-wrapper></div>
                 <div class="swiper__tools">
                     <div class="swiper__buttons">
                         <button class="swiper-button-prev">
@@ -159,7 +160,7 @@
         </div>
     </section>
     <!-- Projects -->
-    <section class="section projects">
+    <section class="section projects" id="projects">
         <h1 class="projects__header">Some of my work</h1>
         <div class="project">
             <div class="project__header">
@@ -269,11 +270,11 @@
         </div>
     </section>
     <!-- Faq -->
-    <div class="faq">
+    <div class="faq" id="faq">
         <div class="faq__wrap">
             <div class="section__header-title">/Faq</div>
             <div class="section__header-subtitle">Have any questions?</div>
-            <div class="question">
+            <div class="question" data-question>
                 <div class="question__wrap">
                     <div class="question__status"></div>
                     <h3>How long does it take to build a website?</h3>
@@ -284,7 +285,7 @@
                     </p>
                 </div>
             </div>
-            <div class="question">
+            <div class="question" data-question>
                 <div class="question__wrap">
                     <div class="question__status"></div>
                     <h3>Hello there I love you</h3>
@@ -464,26 +465,24 @@
     <template data-review-slide-template>
         <div class="swiper-slide">
             <div class="review">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z"/></svg>
                 <div class="review__card">
                     <div class="review__topborder"></div>
                     <div class="review__text">
-                        <span>S</span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi voluptate sunt placeat dolores harum enim aliquam unde. Eligendi est nobis dignissimos, sed esse inventore deserunt! Aliquam non iure odio enim.
-                        Dolore eligendi omnis nisi asperiores officiis obcaecati facilis voluptas? Placeat cum similique, eos laboriosam asperiores temporibus! Fugiat, odit? Voluptate et enim non, quam mollitia quas laboriosam quidem deserunt commodi voluptatem?
-                        Veniam quidem numquam tempore tempora laborum totam consequuntur accusantium est quam nesciunt molestias porro dignissimos libero fugit, assumenda dolore in vitae culpa alias, optio animi aut deserunt vel. Hic, porro.
+                        <span data-first-letter>S</span>
+                        <p data-review-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi voluptate sunt placeat dolores harum enim aliquam unde. Eligendi est nobis dignissimos, sed esse inventore deserunt! Aliquam non iure odio enim.
+                            Dolore eligendi omnis nisi asperiores officiis obcaecati facilis voluptas? Placeat cum similique, eos laboriosam asperiores temporibus! Fugiat, odit? Voluptate et enim non, quam mollitia quas laboriosam quidem deserunt commodi voluptatem?
+                            Veniam quidem numquam tempore tempora laborum totam consequuntur accusantium est quam nesciunt molestias porro dignissimos libero fugit, assumenda dolore in vitae culpa alias, optio animi aut deserunt vel. Hic, porro.
+                        </p>
                     </div>
-                    <img src="assets/images/avatars/1.png" alt="" class="review__img">
+                    <img src="assets/images/avatars/1.png" alt="" class="review__img" data-review-image>
                     <div class="review__profile">
-                        <span>Nhan Pham</span>
-                        <span>Web Developer</span>
+                        <span data-review-name>Nhan Pham</span>
+                        <span data-review-position>Web Developer</span>
                     </div>
                 </div>
             </div>
         </div>
     </template>
-    <script src="assets/js/app.js"></script>
-    <script src="assets/js/threeBg.js"></script>
-    <script src="assets/js/shaded3dImage.js"></script>
 </body>
 </html>

@@ -36164,16 +36164,8 @@ module.exports = "/5.e7bd33e0.png";
 module.exports = "/6.98fc865b.png";
 },{}],"assets/images/avatars/7.png":[function(require,module,exports) {
 module.exports = "/7.0532b546.png";
-},{}],"assets/images/shapes/19.jpg":[function(require,module,exports) {
-module.exports = "/19.2b9ccd07.jpg";
-},{}],"assets/images/shapes/24.jpg":[function(require,module,exports) {
-module.exports = "/24.ea916fcf.jpg";
-},{}],"assets/images/shapes/26.jpg":[function(require,module,exports) {
-module.exports = "/26.ed79881b.jpg";
-},{}],"assets/images/shapes/44.jpg":[function(require,module,exports) {
-module.exports = "/44.e1b92a2a.jpg";
-},{}],"assets/images/shapes/213.png":[function(require,module,exports) {
-module.exports = "/213.8a2f2479.png";
+},{}],"assets/images/shapes/34.jpg":[function(require,module,exports) {
+module.exports = "/34.a9943b2a.jpg";
 },{}],"assets/images/me.jpg":[function(require,module,exports) {
 module.exports = "/me.8a0db8cf.jpg";
 },{}],"assets/images/me.png":[function(require,module,exports) {
@@ -36192,11 +36184,7 @@ var _4 = _interopRequireDefault(require("../images/avatars/4.png"));
 var _5 = _interopRequireDefault(require("../images/avatars/5.png"));
 var _6 = _interopRequireDefault(require("../images/avatars/6.png"));
 var _7 = _interopRequireDefault(require("../images/avatars/7.png"));
-var _8 = _interopRequireDefault(require("../images/shapes/19.jpg"));
-var _9 = _interopRequireDefault(require("../images/shapes/24.jpg"));
-var _10 = _interopRequireDefault(require("../images/shapes/26.jpg"));
-var _11 = _interopRequireDefault(require("../images/shapes/44.jpg"));
-var _12 = _interopRequireDefault(require("../images/shapes/213.png"));
+var _8 = _interopRequireDefault(require("../images/shapes/34.jpg"));
 var _me = _interopRequireDefault(require("../images/me.jpg"));
 var _me2 = _interopRequireDefault(require("../images/me.png"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -36208,17 +36196,13 @@ var images = {
   avatar5: _5.default,
   avatar6: _6.default,
   avatar7: _7.default,
-  bg1: _8.default,
-  bg2: _9.default,
-  bg3: _10.default,
-  bg4: _11.default,
-  bg5: _12.default,
+  bg: _8.default,
   me1: _me.default,
   me2: _me2.default
 };
 var _default = images;
 exports.default = _default;
-},{"../images/avatars/1.png":"assets/images/avatars/1.png","../images/avatars/2.png":"assets/images/avatars/2.png","../images/avatars/3.png":"assets/images/avatars/3.png","../images/avatars/4.png":"assets/images/avatars/4.png","../images/avatars/5.png":"assets/images/avatars/5.png","../images/avatars/6.png":"assets/images/avatars/6.png","../images/avatars/7.png":"assets/images/avatars/7.png","../images/shapes/19.jpg":"assets/images/shapes/19.jpg","../images/shapes/24.jpg":"assets/images/shapes/24.jpg","../images/shapes/26.jpg":"assets/images/shapes/26.jpg","../images/shapes/44.jpg":"assets/images/shapes/44.jpg","../images/shapes/213.png":"assets/images/shapes/213.png","../images/me.jpg":"assets/images/me.jpg","../images/me.png":"assets/images/me.png"}],"assets/js/threeBg.js":[function(require,module,exports) {
+},{"../images/avatars/1.png":"assets/images/avatars/1.png","../images/avatars/2.png":"assets/images/avatars/2.png","../images/avatars/3.png":"assets/images/avatars/3.png","../images/avatars/4.png":"assets/images/avatars/4.png","../images/avatars/5.png":"assets/images/avatars/5.png","../images/avatars/6.png":"assets/images/avatars/6.png","../images/avatars/7.png":"assets/images/avatars/7.png","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me.png":"assets/images/me.png"}],"assets/js/threeBg.js":[function(require,module,exports) {
 "use strict";
 
 var THREE = _interopRequireWildcard(require("three"));
@@ -36226,7 +36210,7 @@ var _images = _interopRequireDefault(require("./images.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-var container = document.querySelector(".three_bg");
+var container = document.querySelector("[data-three-bg]");
 var loader = new THREE.TextureLoader();
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -36244,11 +36228,8 @@ window.addEventListener("resize", function () {
 });
 var geometry = new THREE.PlaneGeometry(18, 10, 15, 9);
 var material = new THREE.MeshBasicMaterial({
-  // color: 0xff0000,
-  map: loader.load(_images.default.bg5)
-  // wireframe: true,
+  map: loader.load(_images.default.bg)
 });
-
 var mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 camera.position.z = 5;
@@ -36297,7 +36278,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49966" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50859" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

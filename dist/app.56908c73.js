@@ -5515,7 +5515,539 @@ var gsapWithCSS = _gsapCore.gsap.registerPlugin(_CSSPlugin.CSSPlugin) || _gsapCo
   TweenMaxWithCSS = gsapWithCSS.core.Tween;
 exports.TweenMax = TweenMaxWithCSS;
 exports.default = exports.gsap = gsapWithCSS;
-},{"./gsap-core.js":"../node_modules/gsap/gsap-core.js","./CSSPlugin.js":"../node_modules/gsap/CSSPlugin.js"}],"../node_modules/ssr-window/ssr-window.esm.js":[function(require,module,exports) {
+},{"./gsap-core.js":"../node_modules/gsap/gsap-core.js","./CSSPlugin.js":"../node_modules/gsap/CSSPlugin.js"}],"../node_modules/ev-emitter/ev-emitter.js":[function(require,module,exports) {
+var global = arguments[3];
+/**
+ * EvEmitter v2.1.1
+ * Lil' event emitter
+ * MIT License
+ */
+
+( function( global, factory ) {
+  // universal module definition
+  if ( typeof module == 'object' && module.exports ) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory();
+  } else {
+    // Browser globals
+    global.EvEmitter = factory();
+  }
+
+}( typeof window != 'undefined' ? window : this, function() {
+
+function EvEmitter() {}
+
+let proto = EvEmitter.prototype;
+
+proto.on = function( eventName, listener ) {
+  if ( !eventName || !listener ) return this;
+
+  // set events hash
+  let events = this._events = this._events || {};
+  // set listeners array
+  let listeners = events[ eventName ] = events[ eventName ] || [];
+  // only add once
+  if ( !listeners.includes( listener ) ) {
+    listeners.push( listener );
+  }
+
+  return this;
+};
+
+proto.once = function( eventName, listener ) {
+  if ( !eventName || !listener ) return this;
+
+  // add event
+  this.on( eventName, listener );
+  // set once flag
+  // set onceEvents hash
+  let onceEvents = this._onceEvents = this._onceEvents || {};
+  // set onceListeners object
+  let onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
+  // set flag
+  onceListeners[ listener ] = true;
+
+  return this;
+};
+
+proto.off = function( eventName, listener ) {
+  let listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) return this;
+
+  let index = listeners.indexOf( listener );
+  if ( index != -1 ) {
+    listeners.splice( index, 1 );
+  }
+
+  return this;
+};
+
+proto.emitEvent = function( eventName, args ) {
+  let listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) return this;
+
+  // copy over to avoid interference if .off() in listener
+  listeners = listeners.slice( 0 );
+  args = args || [];
+  // once stuff
+  let onceListeners = this._onceEvents && this._onceEvents[ eventName ];
+
+  for ( let listener of listeners ) {
+    let isOnce = onceListeners && onceListeners[ listener ];
+    if ( isOnce ) {
+      // remove listener
+      // remove before trigger to prevent recursion
+      this.off( eventName, listener );
+      // unset once flag
+      delete onceListeners[ listener ];
+    }
+    // trigger listener
+    listener.apply( this, args );
+  }
+
+  return this;
+};
+
+proto.allOff = function() {
+  delete this._events;
+  delete this._onceEvents;
+  return this;
+};
+
+return EvEmitter;
+
+} ) );
+
+},{}],"../node_modules/imagesloaded/imagesloaded.js":[function(require,module,exports) {
+/*!
+ * imagesLoaded v5.0.0
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+( function( window, factory ) {
+  // universal module definition
+  if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory( window, require('ev-emitter') );
+  } else {
+    // browser global
+    window.imagesLoaded = factory( window, window.EvEmitter );
+  }
+
+} )( typeof window !== 'undefined' ? window : this,
+    function factory( window, EvEmitter ) {
+
+let $ = window.jQuery;
+let console = window.console;
+
+// -------------------------- helpers -------------------------- //
+
+// turn element or nodeList into an array
+function makeArray( obj ) {
+  // use object if already an array
+  if ( Array.isArray( obj ) ) return obj;
+
+  let isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
+  // convert nodeList to array
+  if ( isArrayLike ) return [ ...obj ];
+
+  // array of single index
+  return [ obj ];
+}
+
+// -------------------------- imagesLoaded -------------------------- //
+
+/**
+ * @param {[Array, Element, NodeList, String]} elem
+ * @param {[Object, Function]} options - if function, use as callback
+ * @param {Function} onAlways - callback function
+ * @returns {ImagesLoaded}
+ */
+function ImagesLoaded( elem, options, onAlways ) {
+  // coerce ImagesLoaded() without new, to be new ImagesLoaded()
+  if ( !( this instanceof ImagesLoaded ) ) {
+    return new ImagesLoaded( elem, options, onAlways );
+  }
+  // use elem as selector string
+  let queryElem = elem;
+  if ( typeof elem == 'string' ) {
+    queryElem = document.querySelectorAll( elem );
+  }
+  // bail if bad element
+  if ( !queryElem ) {
+    console.error(`Bad element for imagesLoaded ${queryElem || elem}`);
+    return;
+  }
+
+  this.elements = makeArray( queryElem );
+  this.options = {};
+  // shift arguments if no options set
+  if ( typeof options == 'function' ) {
+    onAlways = options;
+  } else {
+    Object.assign( this.options, options );
+  }
+
+  if ( onAlways ) this.on( 'always', onAlways );
+
+  this.getImages();
+  // add jQuery Deferred object
+  if ( $ ) this.jqDeferred = new $.Deferred();
+
+  // HACK check async to allow time to bind listeners
+  setTimeout( this.check.bind( this ) );
+}
+
+ImagesLoaded.prototype = Object.create( EvEmitter.prototype );
+
+ImagesLoaded.prototype.getImages = function() {
+  this.images = [];
+
+  // filter & find items if we have an item selector
+  this.elements.forEach( this.addElementImages, this );
+};
+
+const elementNodeTypes = [ 1, 9, 11 ];
+
+/**
+ * @param {Node} elem
+ */
+ImagesLoaded.prototype.addElementImages = function( elem ) {
+  // filter siblings
+  if ( elem.nodeName === 'IMG' ) {
+    this.addImage( elem );
+  }
+  // get background image on element
+  if ( this.options.background === true ) {
+    this.addElementBackgroundImages( elem );
+  }
+
+  // find children
+  // no non-element nodes, #143
+  let { nodeType } = elem;
+  if ( !nodeType || !elementNodeTypes.includes( nodeType ) ) return;
+
+  let childImgs = elem.querySelectorAll('img');
+  // concat childElems to filterFound array
+  for ( let img of childImgs ) {
+    this.addImage( img );
+  }
+
+  // get child background images
+  if ( typeof this.options.background == 'string' ) {
+    let children = elem.querySelectorAll( this.options.background );
+    for ( let child of children ) {
+      this.addElementBackgroundImages( child );
+    }
+  }
+};
+
+const reURL = /url\((['"])?(.*?)\1\)/gi;
+
+ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
+  let style = getComputedStyle( elem );
+  // Firefox returns null if in a hidden iframe https://bugzil.la/548397
+  if ( !style ) return;
+
+  // get url inside url("...")
+  let matches = reURL.exec( style.backgroundImage );
+  while ( matches !== null ) {
+    let url = matches && matches[2];
+    if ( url ) {
+      this.addBackground( url, elem );
+    }
+    matches = reURL.exec( style.backgroundImage );
+  }
+};
+
+/**
+ * @param {Image} img
+ */
+ImagesLoaded.prototype.addImage = function( img ) {
+  let loadingImage = new LoadingImage( img );
+  this.images.push( loadingImage );
+};
+
+ImagesLoaded.prototype.addBackground = function( url, elem ) {
+  let background = new Background( url, elem );
+  this.images.push( background );
+};
+
+ImagesLoaded.prototype.check = function() {
+  this.progressedCount = 0;
+  this.hasAnyBroken = false;
+  // complete if no images
+  if ( !this.images.length ) {
+    this.complete();
+    return;
+  }
+
+  /* eslint-disable-next-line func-style */
+  let onProgress = ( image, elem, message ) => {
+    // HACK - Chrome triggers event before object properties have changed. #83
+    setTimeout( () => {
+      this.progress( image, elem, message );
+    } );
+  };
+
+  this.images.forEach( function( loadingImage ) {
+    loadingImage.once( 'progress', onProgress );
+    loadingImage.check();
+  } );
+};
+
+ImagesLoaded.prototype.progress = function( image, elem, message ) {
+  this.progressedCount++;
+  this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
+  // progress event
+  this.emitEvent( 'progress', [ this, image, elem ] );
+  if ( this.jqDeferred && this.jqDeferred.notify ) {
+    this.jqDeferred.notify( this, image );
+  }
+  // check if completed
+  if ( this.progressedCount === this.images.length ) {
+    this.complete();
+  }
+
+  if ( this.options.debug && console ) {
+    console.log( `progress: ${message}`, image, elem );
+  }
+};
+
+ImagesLoaded.prototype.complete = function() {
+  let eventName = this.hasAnyBroken ? 'fail' : 'done';
+  this.isComplete = true;
+  this.emitEvent( eventName, [ this ] );
+  this.emitEvent( 'always', [ this ] );
+  if ( this.jqDeferred ) {
+    let jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
+    this.jqDeferred[ jqMethod ]( this );
+  }
+};
+
+// --------------------------  -------------------------- //
+
+function LoadingImage( img ) {
+  this.img = img;
+}
+
+LoadingImage.prototype = Object.create( EvEmitter.prototype );
+
+LoadingImage.prototype.check = function() {
+  // If complete is true and browser supports natural sizes,
+  // try to check for image status manually.
+  let isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    // report based on naturalWidth
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    return;
+  }
+
+  // If none of the checks above matched, simulate loading on detached element.
+  this.proxyImage = new Image();
+  // add crossOrigin attribute. #204
+  if ( this.img.crossOrigin ) {
+    this.proxyImage.crossOrigin = this.img.crossOrigin;
+  }
+  this.proxyImage.addEventListener( 'load', this );
+  this.proxyImage.addEventListener( 'error', this );
+  // bind to image as well for Firefox. #191
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.proxyImage.src = this.img.currentSrc || this.img.src;
+};
+
+LoadingImage.prototype.getIsImageComplete = function() {
+  // check for non-zero, non-undefined naturalWidth
+  // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671
+  return this.img.complete && this.img.naturalWidth;
+};
+
+LoadingImage.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  let { parentNode } = this.img;
+  // emit progress with parent <picture> or self <img>
+  let elem = parentNode.nodeName === 'PICTURE' ? parentNode : this.img;
+  this.emitEvent( 'progress', [ this, elem, message ] );
+};
+
+// ----- events ----- //
+
+// trigger specified handler for event type
+LoadingImage.prototype.handleEvent = function( event ) {
+  let method = 'on' + event.type;
+  if ( this[ method ] ) {
+    this[ method ]( event );
+  }
+};
+
+LoadingImage.prototype.onload = function() {
+  this.confirm( true, 'onload' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.onerror = function() {
+  this.confirm( false, 'onerror' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.unbindEvents = function() {
+  this.proxyImage.removeEventListener( 'load', this );
+  this.proxyImage.removeEventListener( 'error', this );
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+// -------------------------- Background -------------------------- //
+
+function Background( url, element ) {
+  this.url = url;
+  this.element = element;
+  this.img = new Image();
+}
+
+// inherit LoadingImage prototype
+Background.prototype = Object.create( LoadingImage.prototype );
+
+Background.prototype.check = function() {
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.img.src = this.url;
+  // check if image is already complete
+  let isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    this.unbindEvents();
+  }
+};
+
+Background.prototype.unbindEvents = function() {
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+Background.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  this.emitEvent( 'progress', [ this, this.element, message ] );
+};
+
+// -------------------------- jQuery -------------------------- //
+
+ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
+  jQuery = jQuery || window.jQuery;
+  if ( !jQuery ) return;
+
+  // set local variable
+  $ = jQuery;
+  // $().imagesLoaded()
+  $.fn.imagesLoaded = function( options, onAlways ) {
+    let instance = new ImagesLoaded( this, options, onAlways );
+    return instance.jqDeferred.promise( $( this ) );
+  };
+};
+// try making plugin
+ImagesLoaded.makeJQueryPlugin();
+
+// --------------------------  -------------------------- //
+
+return ImagesLoaded;
+
+} );
+
+},{"ev-emitter":"../node_modules/ev-emitter/ev-emitter.js"}],"assets/js/loader.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _gsap = _interopRequireDefault(require("gsap"));
+var _imagesloaded = _interopRequireDefault(require("imagesloaded"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var bar = document.querySelector("[data-loading-bar-inner]");
+var counter_num = document.querySelector("[data-loading-counter-number]");
+var options = {
+  damping: 0.1,
+  alwaysShowTracks: true,
+  plugins: {
+    disableScroll: {
+      direction: "x"
+    }
+  }
+};
+var c = 0;
+function StartLoading() {
+  var barInterval = setInterval(function () {
+    bar.style.width = c + "%";
+    counter_num.innerText = c + "%";
+    c++;
+    if (c === 101) {
+      clearInterval(barInterval);
+      _gsap.default.to(".loading__bar", {
+        duration: 5,
+        rotate: "90deg",
+        left: "1000%"
+      });
+      _gsap.default.to(".loading__text, .loading__counter", {
+        duration: 0.5,
+        opacity: 0
+      });
+      _gsap.default.to(".loading__box", {
+        duration: 1,
+        height: "500px",
+        borderRadius: "50%"
+      });
+      _gsap.default.to(".loading__svg", {
+        duration: 10,
+        opacity: 1,
+        rotate: "360deg"
+      });
+      _gsap.default.to(".loading__box", {
+        delay: 2,
+        border: "none"
+      });
+      (0, _imagesloaded.default)(document.querySelectorAll("img"), function () {
+        _gsap.default.to(".loading", {
+          delay: 2,
+          duration: 2,
+          zIndex: 1,
+          background: "transparent",
+          opacity: 0.5,
+          pointerEvents: "none"
+        });
+        _gsap.default.to(".loading__svg", {
+          delay: 2,
+          duration: 100,
+          rotate: "360deg"
+        });
+        _gsap.default.to("header", {
+          duration: 1,
+          delay: 2,
+          top: "0"
+        });
+        _gsap.default.to(".socials", {
+          duration: 1,
+          delay: 2.5,
+          bottom: "10rem"
+        });
+        _gsap.default.to(".scrollDown", {
+          duration: 1,
+          delay: 3,
+          bottom: "5.5rem"
+        });
+        setTimeout(function () {
+          document.dispatchEvent(new CustomEvent("initSmoothScroll", {
+            detail: options
+          }));
+        }, 2000);
+      });
+    }
+  }, 20);
+}
+var _default = StartLoading;
+exports.default = _default;
+},{"gsap":"../node_modules/gsap/index.js","imagesloaded":"../node_modules/imagesloaded/imagesloaded.js"}],"../node_modules/ssr-window/ssr-window.esm.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15230,16 +15762,8 @@ module.exports = "/5.e7bd33e0.png";
 module.exports = "/6.98fc865b.png";
 },{}],"assets/images/avatars/7.png":[function(require,module,exports) {
 module.exports = "/7.0532b546.png";
-},{}],"assets/images/shapes/19.jpg":[function(require,module,exports) {
-module.exports = "/19.2b9ccd07.jpg";
-},{}],"assets/images/shapes/24.jpg":[function(require,module,exports) {
-module.exports = "/24.ea916fcf.jpg";
-},{}],"assets/images/shapes/26.jpg":[function(require,module,exports) {
-module.exports = "/26.ed79881b.jpg";
-},{}],"assets/images/shapes/44.jpg":[function(require,module,exports) {
-module.exports = "/44.e1b92a2a.jpg";
-},{}],"assets/images/shapes/213.png":[function(require,module,exports) {
-module.exports = "/213.8a2f2479.png";
+},{}],"assets/images/shapes/34.jpg":[function(require,module,exports) {
+module.exports = "/34.a9943b2a.jpg";
 },{}],"assets/images/me.jpg":[function(require,module,exports) {
 module.exports = "/me.8a0db8cf.jpg";
 },{}],"assets/images/me.png":[function(require,module,exports) {
@@ -15258,11 +15782,7 @@ var _4 = _interopRequireDefault(require("../images/avatars/4.png"));
 var _5 = _interopRequireDefault(require("../images/avatars/5.png"));
 var _6 = _interopRequireDefault(require("../images/avatars/6.png"));
 var _7 = _interopRequireDefault(require("../images/avatars/7.png"));
-var _8 = _interopRequireDefault(require("../images/shapes/19.jpg"));
-var _9 = _interopRequireDefault(require("../images/shapes/24.jpg"));
-var _10 = _interopRequireDefault(require("../images/shapes/26.jpg"));
-var _11 = _interopRequireDefault(require("../images/shapes/44.jpg"));
-var _12 = _interopRequireDefault(require("../images/shapes/213.png"));
+var _8 = _interopRequireDefault(require("../images/shapes/34.jpg"));
 var _me = _interopRequireDefault(require("../images/me.jpg"));
 var _me2 = _interopRequireDefault(require("../images/me.png"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -15274,17 +15794,13 @@ var images = {
   avatar5: _5.default,
   avatar6: _6.default,
   avatar7: _7.default,
-  bg1: _8.default,
-  bg2: _9.default,
-  bg3: _10.default,
-  bg4: _11.default,
-  bg5: _12.default,
+  bg: _8.default,
   me1: _me.default,
   me2: _me2.default
 };
 var _default = images;
 exports.default = _default;
-},{"../images/avatars/1.png":"assets/images/avatars/1.png","../images/avatars/2.png":"assets/images/avatars/2.png","../images/avatars/3.png":"assets/images/avatars/3.png","../images/avatars/4.png":"assets/images/avatars/4.png","../images/avatars/5.png":"assets/images/avatars/5.png","../images/avatars/6.png":"assets/images/avatars/6.png","../images/avatars/7.png":"assets/images/avatars/7.png","../images/shapes/19.jpg":"assets/images/shapes/19.jpg","../images/shapes/24.jpg":"assets/images/shapes/24.jpg","../images/shapes/26.jpg":"assets/images/shapes/26.jpg","../images/shapes/44.jpg":"assets/images/shapes/44.jpg","../images/shapes/213.png":"assets/images/shapes/213.png","../images/me.jpg":"assets/images/me.jpg","../images/me.png":"assets/images/me.png"}],"assets/js/data.js":[function(require,module,exports) {
+},{"../images/avatars/1.png":"assets/images/avatars/1.png","../images/avatars/2.png":"assets/images/avatars/2.png","../images/avatars/3.png":"assets/images/avatars/3.png","../images/avatars/4.png":"assets/images/avatars/4.png","../images/avatars/5.png":"assets/images/avatars/5.png","../images/avatars/6.png":"assets/images/avatars/6.png","../images/avatars/7.png":"assets/images/avatars/7.png","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me.png":"assets/images/me.png"}],"assets/js/data.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15330,447 +15846,60 @@ var reviews = [{
   review: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui, maxime. Amet, unde laudantium dolore praesentium, asperiores sunt voluptas illo laborum quod laboriosam facere dolor distinctio tempora adipisci beatae reiciendis itaque!"
 }];
 exports.reviews = reviews;
-},{"./images":"assets/js/images.js"}],"../node_modules/ev-emitter/ev-emitter.js":[function(require,module,exports) {
-var global = arguments[3];
-/**
- * EvEmitter v2.1.1
- * Lil' event emitter
- * MIT License
- */
+},{"./images":"assets/js/images.js"}],"assets/js/swiper.js":[function(require,module,exports) {
+"use strict";
 
-( function( global, factory ) {
-  // universal module definition
-  if ( typeof module == 'object' && module.exports ) {
-    // CommonJS - Browserify, Webpack
-    module.exports = factory();
-  } else {
-    // Browser globals
-    global.EvEmitter = factory();
-  }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _swiper = _interopRequireWildcard(require("swiper"));
+var _data = require("./data.js");
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+var reviewTemplate = document.querySelector("[data-review-slide-template]");
+var swiperContainer = document.querySelector("[data-swiper-wrapper]");
 
-}( typeof window != 'undefined' ? window : this, function() {
-
-function EvEmitter() {}
-
-let proto = EvEmitter.prototype;
-
-proto.on = function( eventName, listener ) {
-  if ( !eventName || !listener ) return this;
-
-  // set events hash
-  let events = this._events = this._events || {};
-  // set listeners array
-  let listeners = events[ eventName ] = events[ eventName ] || [];
-  // only add once
-  if ( !listeners.includes( listener ) ) {
-    listeners.push( listener );
-  }
-
-  return this;
-};
-
-proto.once = function( eventName, listener ) {
-  if ( !eventName || !listener ) return this;
-
-  // add event
-  this.on( eventName, listener );
-  // set once flag
-  // set onceEvents hash
-  let onceEvents = this._onceEvents = this._onceEvents || {};
-  // set onceListeners object
-  let onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
-  // set flag
-  onceListeners[ listener ] = true;
-
-  return this;
-};
-
-proto.off = function( eventName, listener ) {
-  let listeners = this._events && this._events[ eventName ];
-  if ( !listeners || !listeners.length ) return this;
-
-  let index = listeners.indexOf( listener );
-  if ( index != -1 ) {
-    listeners.splice( index, 1 );
-  }
-
-  return this;
-};
-
-proto.emitEvent = function( eventName, args ) {
-  let listeners = this._events && this._events[ eventName ];
-  if ( !listeners || !listeners.length ) return this;
-
-  // copy over to avoid interference if .off() in listener
-  listeners = listeners.slice( 0 );
-  args = args || [];
-  // once stuff
-  let onceListeners = this._onceEvents && this._onceEvents[ eventName ];
-
-  for ( let listener of listeners ) {
-    let isOnce = onceListeners && onceListeners[ listener ];
-    if ( isOnce ) {
-      // remove listener
-      // remove before trigger to prevent recursion
-      this.off( eventName, listener );
-      // unset once flag
-      delete onceListeners[ listener ];
-    }
-    // trigger listener
-    listener.apply( this, args );
-  }
-
-  return this;
-};
-
-proto.allOff = function() {
-  delete this._events;
-  delete this._onceEvents;
-  return this;
-};
-
-return EvEmitter;
-
-} ) );
-
-},{}],"../node_modules/imagesloaded/imagesloaded.js":[function(require,module,exports) {
-/*!
- * imagesLoaded v5.0.0
- * JavaScript is all like "You images are done yet or what?"
- * MIT License
- */
-
-( function( window, factory ) {
-  // universal module definition
-  if ( typeof module == 'object' && module.exports ) {
-    // CommonJS
-    module.exports = factory( window, require('ev-emitter') );
-  } else {
-    // browser global
-    window.imagesLoaded = factory( window, window.EvEmitter );
-  }
-
-} )( typeof window !== 'undefined' ? window : this,
-    function factory( window, EvEmitter ) {
-
-let $ = window.jQuery;
-let console = window.console;
-
-// -------------------------- helpers -------------------------- //
-
-// turn element or nodeList into an array
-function makeArray( obj ) {
-  // use object if already an array
-  if ( Array.isArray( obj ) ) return obj;
-
-  let isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
-  // convert nodeList to array
-  if ( isArrayLike ) return [ ...obj ];
-
-  // array of single index
-  return [ obj ];
-}
-
-// -------------------------- imagesLoaded -------------------------- //
-
-/**
- * @param {[Array, Element, NodeList, String]} elem
- * @param {[Object, Function]} options - if function, use as callback
- * @param {Function} onAlways - callback function
- * @returns {ImagesLoaded}
- */
-function ImagesLoaded( elem, options, onAlways ) {
-  // coerce ImagesLoaded() without new, to be new ImagesLoaded()
-  if ( !( this instanceof ImagesLoaded ) ) {
-    return new ImagesLoaded( elem, options, onAlways );
-  }
-  // use elem as selector string
-  let queryElem = elem;
-  if ( typeof elem == 'string' ) {
-    queryElem = document.querySelectorAll( elem );
-  }
-  // bail if bad element
-  if ( !queryElem ) {
-    console.error(`Bad element for imagesLoaded ${queryElem || elem}`);
-    return;
-  }
-
-  this.elements = makeArray( queryElem );
-  this.options = {};
-  // shift arguments if no options set
-  if ( typeof options == 'function' ) {
-    onAlways = options;
-  } else {
-    Object.assign( this.options, options );
-  }
-
-  if ( onAlways ) this.on( 'always', onAlways );
-
-  this.getImages();
-  // add jQuery Deferred object
-  if ( $ ) this.jqDeferred = new $.Deferred();
-
-  // HACK check async to allow time to bind listeners
-  setTimeout( this.check.bind( this ) );
-}
-
-ImagesLoaded.prototype = Object.create( EvEmitter.prototype );
-
-ImagesLoaded.prototype.getImages = function() {
-  this.images = [];
-
-  // filter & find items if we have an item selector
-  this.elements.forEach( this.addElementImages, this );
-};
-
-const elementNodeTypes = [ 1, 9, 11 ];
-
-/**
- * @param {Node} elem
- */
-ImagesLoaded.prototype.addElementImages = function( elem ) {
-  // filter siblings
-  if ( elem.nodeName === 'IMG' ) {
-    this.addImage( elem );
-  }
-  // get background image on element
-  if ( this.options.background === true ) {
-    this.addElementBackgroundImages( elem );
-  }
-
-  // find children
-  // no non-element nodes, #143
-  let { nodeType } = elem;
-  if ( !nodeType || !elementNodeTypes.includes( nodeType ) ) return;
-
-  let childImgs = elem.querySelectorAll('img');
-  // concat childElems to filterFound array
-  for ( let img of childImgs ) {
-    this.addImage( img );
-  }
-
-  // get child background images
-  if ( typeof this.options.background == 'string' ) {
-    let children = elem.querySelectorAll( this.options.background );
-    for ( let child of children ) {
-      this.addElementBackgroundImages( child );
+// review swiper
+_swiper.default.use([_swiper.Pagination, _swiper.Navigation]);
+var swiper = new _swiper.default(".swiper", {
+  slidesPerView: 1,
+  spaceBetween: 30,
+  pagination: {
+    el: ".swiper-pagination",
+    type: "bullets",
+    clickable: true
+  },
+  navigation: {
+    prevEl: ".swiper-button-prev",
+    nextEl: ".swiper-button-next"
+  },
+  breakpoints: {
+    850: {
+      slidesPerView: 2
+    },
+    1400: {
+      slidesPerView: 3
+    },
+    1900: {
+      slidesPerView: 5
     }
   }
-};
-
-const reURL = /url\((['"])?(.*?)\1\)/gi;
-
-ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
-  let style = getComputedStyle( elem );
-  // Firefox returns null if in a hidden iframe https://bugzil.la/548397
-  if ( !style ) return;
-
-  // get url inside url("...")
-  let matches = reURL.exec( style.backgroundImage );
-  while ( matches !== null ) {
-    let url = matches && matches[2];
-    if ( url ) {
-      this.addBackground( url, elem );
-    }
-    matches = reURL.exec( style.backgroundImage );
-  }
-};
-
-/**
- * @param {Image} img
- */
-ImagesLoaded.prototype.addImage = function( img ) {
-  let loadingImage = new LoadingImage( img );
-  this.images.push( loadingImage );
-};
-
-ImagesLoaded.prototype.addBackground = function( url, elem ) {
-  let background = new Background( url, elem );
-  this.images.push( background );
-};
-
-ImagesLoaded.prototype.check = function() {
-  this.progressedCount = 0;
-  this.hasAnyBroken = false;
-  // complete if no images
-  if ( !this.images.length ) {
-    this.complete();
-    return;
-  }
-
-  /* eslint-disable-next-line func-style */
-  let onProgress = ( image, elem, message ) => {
-    // HACK - Chrome triggers event before object properties have changed. #83
-    setTimeout( () => {
-      this.progress( image, elem, message );
-    } );
-  };
-
-  this.images.forEach( function( loadingImage ) {
-    loadingImage.once( 'progress', onProgress );
-    loadingImage.check();
-  } );
-};
-
-ImagesLoaded.prototype.progress = function( image, elem, message ) {
-  this.progressedCount++;
-  this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
-  // progress event
-  this.emitEvent( 'progress', [ this, image, elem ] );
-  if ( this.jqDeferred && this.jqDeferred.notify ) {
-    this.jqDeferred.notify( this, image );
-  }
-  // check if completed
-  if ( this.progressedCount === this.images.length ) {
-    this.complete();
-  }
-
-  if ( this.options.debug && console ) {
-    console.log( `progress: ${message}`, image, elem );
-  }
-};
-
-ImagesLoaded.prototype.complete = function() {
-  let eventName = this.hasAnyBroken ? 'fail' : 'done';
-  this.isComplete = true;
-  this.emitEvent( eventName, [ this ] );
-  this.emitEvent( 'always', [ this ] );
-  if ( this.jqDeferred ) {
-    let jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
-    this.jqDeferred[ jqMethod ]( this );
-  }
-};
-
-// --------------------------  -------------------------- //
-
-function LoadingImage( img ) {
-  this.img = img;
+});
+function initSwiper() {
+  _data.reviews.map(function (review) {
+    var reviewNode = reviewTemplate.content.cloneNode(true);
+    reviewNode.querySelector("[data-first-letter]").innerText = review.review.substring(0, 1);
+    reviewNode.querySelector("[data-review-text]").innerText = review.review.substring(1, review.review.length);
+    reviewNode.querySelector("[data-review-image]").src = review.image;
+    reviewNode.querySelector("[data-review-name]").innerText = review.name;
+    reviewNode.querySelector("[data-review-position]").innerText = review.position;
+    swiperContainer.appendChild(reviewNode);
+  });
 }
-
-LoadingImage.prototype = Object.create( EvEmitter.prototype );
-
-LoadingImage.prototype.check = function() {
-  // If complete is true and browser supports natural sizes,
-  // try to check for image status manually.
-  let isComplete = this.getIsImageComplete();
-  if ( isComplete ) {
-    // report based on naturalWidth
-    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
-    return;
-  }
-
-  // If none of the checks above matched, simulate loading on detached element.
-  this.proxyImage = new Image();
-  // add crossOrigin attribute. #204
-  if ( this.img.crossOrigin ) {
-    this.proxyImage.crossOrigin = this.img.crossOrigin;
-  }
-  this.proxyImage.addEventListener( 'load', this );
-  this.proxyImage.addEventListener( 'error', this );
-  // bind to image as well for Firefox. #191
-  this.img.addEventListener( 'load', this );
-  this.img.addEventListener( 'error', this );
-  this.proxyImage.src = this.img.currentSrc || this.img.src;
-};
-
-LoadingImage.prototype.getIsImageComplete = function() {
-  // check for non-zero, non-undefined naturalWidth
-  // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671
-  return this.img.complete && this.img.naturalWidth;
-};
-
-LoadingImage.prototype.confirm = function( isLoaded, message ) {
-  this.isLoaded = isLoaded;
-  let { parentNode } = this.img;
-  // emit progress with parent <picture> or self <img>
-  let elem = parentNode.nodeName === 'PICTURE' ? parentNode : this.img;
-  this.emitEvent( 'progress', [ this, elem, message ] );
-};
-
-// ----- events ----- //
-
-// trigger specified handler for event type
-LoadingImage.prototype.handleEvent = function( event ) {
-  let method = 'on' + event.type;
-  if ( this[ method ] ) {
-    this[ method ]( event );
-  }
-};
-
-LoadingImage.prototype.onload = function() {
-  this.confirm( true, 'onload' );
-  this.unbindEvents();
-};
-
-LoadingImage.prototype.onerror = function() {
-  this.confirm( false, 'onerror' );
-  this.unbindEvents();
-};
-
-LoadingImage.prototype.unbindEvents = function() {
-  this.proxyImage.removeEventListener( 'load', this );
-  this.proxyImage.removeEventListener( 'error', this );
-  this.img.removeEventListener( 'load', this );
-  this.img.removeEventListener( 'error', this );
-};
-
-// -------------------------- Background -------------------------- //
-
-function Background( url, element ) {
-  this.url = url;
-  this.element = element;
-  this.img = new Image();
-}
-
-// inherit LoadingImage prototype
-Background.prototype = Object.create( LoadingImage.prototype );
-
-Background.prototype.check = function() {
-  this.img.addEventListener( 'load', this );
-  this.img.addEventListener( 'error', this );
-  this.img.src = this.url;
-  // check if image is already complete
-  let isComplete = this.getIsImageComplete();
-  if ( isComplete ) {
-    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
-    this.unbindEvents();
-  }
-};
-
-Background.prototype.unbindEvents = function() {
-  this.img.removeEventListener( 'load', this );
-  this.img.removeEventListener( 'error', this );
-};
-
-Background.prototype.confirm = function( isLoaded, message ) {
-  this.isLoaded = isLoaded;
-  this.emitEvent( 'progress', [ this, this.element, message ] );
-};
-
-// -------------------------- jQuery -------------------------- //
-
-ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
-  jQuery = jQuery || window.jQuery;
-  if ( !jQuery ) return;
-
-  // set local variable
-  $ = jQuery;
-  // $().imagesLoaded()
-  $.fn.imagesLoaded = function( options, onAlways ) {
-    let instance = new ImagesLoaded( this, options, onAlways );
-    return instance.jqDeferred.promise( $( this ) );
-  };
-};
-// try making plugin
-ImagesLoaded.makeJQueryPlugin();
-
-// --------------------------  -------------------------- //
-
-return ImagesLoaded;
-
-} );
-
-},{"ev-emitter":"../node_modules/ev-emitter/ev-emitter.js"}],"../node_modules/tslib/tslib.es6.js":[function(require,module,exports) {
+var _default = initSwiper;
+exports.default = _default;
+},{"swiper":"../node_modules/swiper/swiper.esm.js","./data.js":"assets/js/data.js"}],"../node_modules/tslib/tslib.es6.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22051,24 +22180,17 @@ var SmoothScrollbar = /** @class */function (_super) {
 }(_scrollbar.Scrollbar);
 var _default = SmoothScrollbar;
 exports.default = _default;
-},{"tslib":"../node_modules/tslib/tslib.es6.js","./polyfills":"../node_modules/smooth-scrollbar/polyfills.js","./scrollbar":"../node_modules/smooth-scrollbar/scrollbar.js","./plugin":"../node_modules/smooth-scrollbar/plugin.js","./style":"../node_modules/smooth-scrollbar/style.js"}],"assets/js/app.js":[function(require,module,exports) {
+},{"tslib":"../node_modules/tslib/tslib.es6.js","./polyfills":"../node_modules/smooth-scrollbar/polyfills.js","./scrollbar":"../node_modules/smooth-scrollbar/scrollbar.js","./plugin":"../node_modules/smooth-scrollbar/plugin.js","./style":"../node_modules/smooth-scrollbar/style.js"}],"assets/js/smoothScroll.js":[function(require,module,exports) {
 "use strict";
 
-var _gsap = _interopRequireDefault(require("gsap"));
-var _swiper = _interopRequireWildcard(require("swiper"));
-var _data = require("./data.js");
-var _imagesloaded = _interopRequireDefault(require("imagesloaded"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 var _smoothScrollbar = _interopRequireWildcard(require("smooth-scrollbar"));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22158,123 +22280,20 @@ var AnchorPlugin = /*#__PURE__*/function (_ScrollbarPlugin2) {
     }
   }]);
   return AnchorPlugin;
-}(_smoothScrollbar.ScrollbarPlugin); // usage
+}(_smoothScrollbar.ScrollbarPlugin);
 _defineProperty(AnchorPlugin, "pluginName", "anchor");
 _smoothScrollbar.default.use(AnchorPlugin);
-// load the plugin
 _smoothScrollbar.default.use(DisableScrollPlugin);
-var bar = document.querySelector(".loading__bar--inner");
-var counter_num = document.querySelector(".loading__counter--number");
-var c = 0;
-var barInterval = setInterval(function () {
-  bar.style.width = c + "%";
-  counter_num.innerText = c + "%";
-  c++;
-  if (c === 101) {
-    clearInterval(barInterval);
-    _gsap.default.to(".loading__bar", {
-      duration: 5,
-      rotate: "90deg",
-      left: "1000%"
-    });
-    _gsap.default.to(".loading__text, .loading__counter", {
-      duration: 0.5,
-      opacity: 0
-    });
-    _gsap.default.to(".loading__box", {
-      duration: 1,
-      height: "500px",
-      borderRadius: "50%"
-    });
-    _gsap.default.to(".loading__svg", {
-      duration: 10,
-      opacity: 1,
-      rotate: "360deg"
-    });
-    _gsap.default.to(".loading__box", {
-      delay: 2,
-      border: "none"
-    });
-    (0, _imagesloaded.default)(document.querySelectorAll("img"), function () {
-      _gsap.default.to(".loading", {
-        delay: 2,
-        duration: 2,
-        zIndex: 1,
-        background: "transparent",
-        opacity: 0.5,
-        pointerEvents: "none"
-      });
-      _gsap.default.to(".loading__svg", {
-        delay: 2,
-        duration: 100,
-        rotate: "360deg"
-      });
-      _gsap.default.to("header", {
-        duration: 1,
-        delay: 2,
-        top: "0"
-      });
-      _gsap.default.to(".socials", {
-        duration: 1,
-        delay: 2.5,
-        bottom: "10rem"
-      });
-      _gsap.default.to(".scrollDown", {
-        duration: 1,
-        delay: 3,
-        bottom: "5rem"
-      });
-      setTimeout(function () {
-        var options = {
-          damping: 0.1,
-          alwaysShowTracks: true,
-          plugins: {
-            disableScroll: {
-              direction: "x"
-            }
-          }
-        };
-        var pageSmoothScroll = _smoothScrollbar.default.init(document.body, options);
-        pageSmoothScroll.track.xAxis.element.remove();
-      }, 2000);
-    });
-  }
-}, 20);
-
-// review swiper
-_swiper.default.use([_swiper.Pagination, _swiper.Navigation]);
-var swiper = new _swiper.default(".swiper", {
-  slidesPerView: 1,
-  spaceBetween: 30,
-  pagination: {
-    el: ".swiper-pagination",
-    type: "bullets",
-    clickable: true
-  },
-  navigation: {
-    prevEl: ".swiper-button-prev",
-    nextEl: ".swiper-button-next"
-  },
-  breakpoints: {
-    850: {
-      slidesPerView: 2
-    },
-    1400: {
-      slidesPerView: 3
-    },
-    1900: {
-      slidesPerView: 5
-    }
-  }
-});
-var swiperContainer = document.querySelector(".swiper-wrapper");
-_data.reviews.map(function (review) {
-  var template = "<div class=\"swiper-slide\"><div class=\"review\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d=\"M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z\"/></svg><div class=\"review__card\"><div class=\"review__topborder\"></div><div class=\"review__text\"><span>".concat(review.review.substring(0, 1), "</span>").concat(review.review.substring(1, review.review.length), "</div><img src=\"").concat(review.image, "\" alt=\"\" class=\"review__img\"><div class=\"review__profile\"><span>").concat(review.name, "</span><span>").concat(review.position, "</span></div></div></div></div>");
-  swiperContainer.innerHTML += template;
-});
-
-// Faq
-var questions = _toConsumableArray(document.querySelectorAll(".question"));
+var _default = _smoothScrollbar.default;
+exports.default = _default;
+},{"smooth-scrollbar":"../node_modules/smooth-scrollbar/index.js"}],"assets/js/faq.js":[function(require,module,exports) {
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+var questions = _toConsumableArray(document.querySelectorAll("[data-question]"));
 questions.forEach(function (question) {
   question.addEventListener("click", function () {
     question.classList.toggle("open");
@@ -22285,7 +22304,30 @@ questions.forEach(function (question) {
     });
   });
 });
-},{"gsap":"../node_modules/gsap/index.js","swiper":"../node_modules/swiper/swiper.esm.js","./data.js":"assets/js/data.js","imagesloaded":"../node_modules/imagesloaded/imagesloaded.js","smooth-scrollbar":"../node_modules/smooth-scrollbar/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"assets/js/scrollDown.js":[function(require,module,exports) {
+var scrollDownElem = document.querySelector("[data-scroll-down]");
+scrollDownElem.addEventListener("click", function () {
+  document.getElementById("skills").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
+},{}],"assets/js/app.js":[function(require,module,exports) {
+"use strict";
+
+var _loader = _interopRequireDefault(require("./loader.js"));
+var _swiper = _interopRequireDefault(require("./swiper.js"));
+var _smoothScroll = _interopRequireDefault(require("./smoothScroll.js"));
+require("./faq.js");
+require("./scrollDown.js");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _loader.default)();
+(0, _swiper.default)();
+document.addEventListener("initSmoothScroll", function (e) {
+  var pageSmoothScroll = _smoothScroll.default.init(document.body, e.detail);
+  pageSmoothScroll.track.xAxis.element.remove();
+});
+},{"./loader.js":"assets/js/loader.js","./swiper.js":"assets/js/swiper.js","./smoothScroll.js":"assets/js/smoothScroll.js","./faq.js":"assets/js/faq.js","./scrollDown.js":"assets/js/scrollDown.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -22310,7 +22352,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49966" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50859" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

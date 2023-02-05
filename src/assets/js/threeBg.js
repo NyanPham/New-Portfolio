@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import images from "./images.js";
 
-const container = document.querySelector(".three_bg");
+const container = document.querySelector("[data-three-bg]");
 const loader = new THREE.TextureLoader();
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -26,9 +26,7 @@ window.addEventListener("resize", () => {
 
 const geometry = new THREE.PlaneGeometry(18, 10, 15, 9);
 const material = new THREE.MeshBasicMaterial({
-    // color: 0xff0000,
-    map: loader.load(images.bg5),
-    // wireframe: true,
+    map: loader.load(images.bg),
 });
 
 const mesh = new THREE.Mesh(geometry, material);

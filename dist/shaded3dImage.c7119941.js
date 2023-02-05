@@ -36164,16 +36164,8 @@ module.exports = "/5.e7bd33e0.png";
 module.exports = "/6.98fc865b.png";
 },{}],"assets/images/avatars/7.png":[function(require,module,exports) {
 module.exports = "/7.0532b546.png";
-},{}],"assets/images/shapes/19.jpg":[function(require,module,exports) {
-module.exports = "/19.2b9ccd07.jpg";
-},{}],"assets/images/shapes/24.jpg":[function(require,module,exports) {
-module.exports = "/24.ea916fcf.jpg";
-},{}],"assets/images/shapes/26.jpg":[function(require,module,exports) {
-module.exports = "/26.ed79881b.jpg";
-},{}],"assets/images/shapes/44.jpg":[function(require,module,exports) {
-module.exports = "/44.e1b92a2a.jpg";
-},{}],"assets/images/shapes/213.png":[function(require,module,exports) {
-module.exports = "/213.8a2f2479.png";
+},{}],"assets/images/shapes/34.jpg":[function(require,module,exports) {
+module.exports = "/34.a9943b2a.jpg";
 },{}],"assets/images/me.jpg":[function(require,module,exports) {
 module.exports = "/me.8a0db8cf.jpg";
 },{}],"assets/images/me.png":[function(require,module,exports) {
@@ -36192,11 +36184,7 @@ var _4 = _interopRequireDefault(require("../images/avatars/4.png"));
 var _5 = _interopRequireDefault(require("../images/avatars/5.png"));
 var _6 = _interopRequireDefault(require("../images/avatars/6.png"));
 var _7 = _interopRequireDefault(require("../images/avatars/7.png"));
-var _8 = _interopRequireDefault(require("../images/shapes/19.jpg"));
-var _9 = _interopRequireDefault(require("../images/shapes/24.jpg"));
-var _10 = _interopRequireDefault(require("../images/shapes/26.jpg"));
-var _11 = _interopRequireDefault(require("../images/shapes/44.jpg"));
-var _12 = _interopRequireDefault(require("../images/shapes/213.png"));
+var _8 = _interopRequireDefault(require("../images/shapes/34.jpg"));
 var _me = _interopRequireDefault(require("../images/me.jpg"));
 var _me2 = _interopRequireDefault(require("../images/me.png"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -36208,17 +36196,13 @@ var images = {
   avatar5: _5.default,
   avatar6: _6.default,
   avatar7: _7.default,
-  bg1: _8.default,
-  bg2: _9.default,
-  bg3: _10.default,
-  bg4: _11.default,
-  bg5: _12.default,
+  bg: _8.default,
   me1: _me.default,
   me2: _me2.default
 };
 var _default = images;
 exports.default = _default;
-},{"../images/avatars/1.png":"assets/images/avatars/1.png","../images/avatars/2.png":"assets/images/avatars/2.png","../images/avatars/3.png":"assets/images/avatars/3.png","../images/avatars/4.png":"assets/images/avatars/4.png","../images/avatars/5.png":"assets/images/avatars/5.png","../images/avatars/6.png":"assets/images/avatars/6.png","../images/avatars/7.png":"assets/images/avatars/7.png","../images/shapes/19.jpg":"assets/images/shapes/19.jpg","../images/shapes/24.jpg":"assets/images/shapes/24.jpg","../images/shapes/26.jpg":"assets/images/shapes/26.jpg","../images/shapes/44.jpg":"assets/images/shapes/44.jpg","../images/shapes/213.png":"assets/images/shapes/213.png","../images/me.jpg":"assets/images/me.jpg","../images/me.png":"assets/images/me.png"}],"assets/shaders/vertex.glsl":[function(require,module,exports) {
+},{"../images/avatars/1.png":"assets/images/avatars/1.png","../images/avatars/2.png":"assets/images/avatars/2.png","../images/avatars/3.png":"assets/images/avatars/3.png","../images/avatars/4.png":"assets/images/avatars/4.png","../images/avatars/5.png":"assets/images/avatars/5.png","../images/avatars/6.png":"assets/images/avatars/6.png","../images/avatars/7.png":"assets/images/avatars/7.png","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me.png":"assets/images/me.png"}],"assets/shaders/vertex.glsl":[function(require,module,exports) {
 module.exports = "#define GLSLIFY 1\nuniform sampler2D uTexture;\nuniform vec2 uOffset;\nvarying vec2 vUv;\n\nfloat M_PI = 3.141529;\n\nvec3 deformationCurve(vec3 position, vec2 uv, vec2 offset) \n{\n    position.x = position.x + (sin(uv.y * M_PI) * offset.x);\n    position.y = position.y + (sin(uv.x * M_PI) * offset.y);\n    return position;\n}\n\nvoid main() \n{\n    vUv = uv;\n    vec3 newPosition = deformationCurve(position, uv, uOffset);\n    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);\n}";
 },{}],"assets/shaders/fragment.glsl":[function(require,module,exports) {
 module.exports = "#define GLSLIFY 1\nuniform sampler2D uTexture;\nuniform float uAlpha;\nuniform vec2 uOffset;\nvarying vec2 vUv;\n\nvec3 rgbShift(sampler2D textureImage, vec2 uv, vec2 offset)\n{\n    float r = texture2D(textureImage, uv + offset).r;\n    vec2 gb = texture2D(textureImage, uv).gb;\n    return vec3(r, gb);\n}\n\nvoid main() \n{\n    vec3 color = rgbShift(uTexture, vUv, uOffset);\n    gl_FragColor = vec4(color, uAlpha);\n}";
@@ -36422,7 +36406,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49966" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50859" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

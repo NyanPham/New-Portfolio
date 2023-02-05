@@ -243,6 +243,70 @@ ul {
   width: 85%;
   opacity: 0;
 }
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap");
+@import url("https://fonts.cdnfonts.com/css/rufscript");
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+*:after, *:before {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  height: 100vh;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+
+/*---Predefined classes-----*/
+.section {
+  padding: 1rem;
+  overflow: hidden;
+  min-height: 100vh;
+  padding-top: 5rem;
+  z-index: 1;
+}
+@media (min-width: 650px) {
+  .section {
+    padding: 5rem;
+  }
+}
+.section__header-title {
+  font-weight: 400;
+  font-size: 17px;
+  color: #666;
+}
+.section__header-subtitle {
+  font-size: 27px;
+  font-weight: 700;
+}
+
 .landing {
   position: relative;
   width: 100%;
@@ -317,6 +381,7 @@ ul {
   width: 50px;
   height: 50px;
   z-index: 1;
+  cursor: pointer;
 }
 .scrollDown__wheel {
   height: 42px;
@@ -362,13 +427,12 @@ ul {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 .scrollDown__arrows .scrollDown__arrow {
-  width: 15px;
-  height: 15px;
-  border-right: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  transform: rotate(45deg);
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #fff;
   animation: scrollAnim 1s infinite;
 }
 .scrollDown__arrows .scrollDown__arrow:nth-child(1) {
