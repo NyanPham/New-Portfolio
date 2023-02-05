@@ -1,5 +1,13 @@
 import Scrollbar, { ScrollbarPlugin } from "smooth-scrollbar";
-
+export const options = {
+    damping: 0.1,
+    alwaysShowTracks: true,
+    plugins: {
+        disableScroll: {
+            direction: "x",
+        },
+    },
+};
 class DisableScrollPlugin extends ScrollbarPlugin {
     static pluginName = "disableScroll";
 

@@ -1,6 +1,6 @@
 import StartLoading from "./loader.js";
 import initSwiper from "./swiper.js";
-import Scrollbar from "./smoothScroll.js";
+import Scrollbar, { options } from "./smoothScroll.js";
 import "./faq.js";
 import "./scrollDown.js";
 
@@ -8,9 +8,10 @@ StartLoading();
 initSwiper();
 RunAnimationWhenInView();
 
-document.addEventListener("initSmoothScroll", (e) => {
-    let pageSmoothScroll = Scrollbar.init(document.body, e.detail);
-    pageSmoothScroll.track.xAxis.element.remove();
+let smoothScrollBarInit = false;
+
+document.addEventListener("initSmoothScroll", () => {
+    initScrollBar();
 });
 
 function RunAnimationWhenInView() {
@@ -30,4 +31,12 @@ function RunAnimationWhenInView() {
     );
 
     animateElemets.forEach((elem) => observer.observe(elem));
+}
+
+function initScrollBar() {
+    if (window.innerWidth < 450 || smoothScrollBarInit) return;
+
+    let pageSmoothScroll = Scrollbar.init(document.body, options);
+    pageSmoothScroll.track.xAxis.element.remove();
+    smoothScrollBarInit = true;
 }

@@ -3,15 +3,6 @@ import imagesLoaded from "imagesloaded";
 
 const bar = document.querySelector("[data-loading-bar-inner]");
 const counter_num = document.querySelector("[data-loading-counter-number]");
-const options = {
-    damping: 0.1,
-    alwaysShowTracks: true,
-    plugins: {
-        disableScroll: {
-            direction: "x",
-        },
-    },
-};
 
 let c = 0;
 
@@ -75,9 +66,7 @@ function StartLoading() {
                     bottom: "5.5rem",
                 });
                 setTimeout(() => {
-                    document.dispatchEvent(
-                        new CustomEvent("initSmoothScroll", { detail: options })
-                    );
+                    document.dispatchEvent(new CustomEvent("initSmoothScroll"));
                 }, 2000);
             });
         }
