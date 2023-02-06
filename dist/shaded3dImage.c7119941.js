@@ -36150,20 +36150,16 @@ if (typeof window !== 'undefined') {
     window.__THREE__ = REVISION;
   }
 }
-},{}],"assets/images/avatars/1.png":[function(require,module,exports) {
-module.exports = "/1.df23daac.png";
-},{}],"assets/images/avatars/2.png":[function(require,module,exports) {
-module.exports = "/2.a6d77134.png";
-},{}],"assets/images/avatars/3.png":[function(require,module,exports) {
-module.exports = "/3.3b8c18db.png";
-},{}],"assets/images/avatars/4.png":[function(require,module,exports) {
-module.exports = "/4.143b2156.png";
-},{}],"assets/images/avatars/5.png":[function(require,module,exports) {
-module.exports = "/5.e7bd33e0.png";
-},{}],"assets/images/avatars/6.png":[function(require,module,exports) {
-module.exports = "/6.98fc865b.png";
-},{}],"assets/images/avatars/7.png":[function(require,module,exports) {
-module.exports = "/7.0532b546.png";
+},{}],"assets/images/avatars/van-khanh.jpg":[function(require,module,exports) {
+module.exports = "/van-khanh.8e2c93b6.jpg";
+},{}],"assets/images/avatars/kieu-trinh.png":[function(require,module,exports) {
+module.exports = "/kieu-trinh.b2dbed3e.png";
+},{}],"assets/images/avatars/duy-nguyen.jpeg":[function(require,module,exports) {
+module.exports = "/duy-nguyen.64b5f196.jpeg";
+},{}],"assets/images/avatars/duc-manh.jpg":[function(require,module,exports) {
+module.exports = "/duc-manh.d3206bd4.jpg";
+},{}],"assets/images/avatars/tu-nguyen.jpg":[function(require,module,exports) {
+module.exports = "/tu-nguyen.7d7e32aa.jpg";
 },{}],"assets/images/shapes/34.jpg":[function(require,module,exports) {
 module.exports = "/34.a9943b2a.jpg";
 },{}],"assets/images/me.jpg":[function(require,module,exports) {
@@ -36179,34 +36175,30 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _ = _interopRequireDefault(require("../images/avatars/1.png"));
-var _2 = _interopRequireDefault(require("../images/avatars/2.png"));
-var _3 = _interopRequireDefault(require("../images/avatars/3.png"));
-var _4 = _interopRequireDefault(require("../images/avatars/4.png"));
-var _5 = _interopRequireDefault(require("../images/avatars/5.png"));
-var _6 = _interopRequireDefault(require("../images/avatars/6.png"));
-var _7 = _interopRequireDefault(require("../images/avatars/7.png"));
-var _8 = _interopRequireDefault(require("../images/shapes/34.jpg"));
+var _vanKhanh = _interopRequireDefault(require("../images/avatars/van-khanh.jpg"));
+var _kieuTrinh = _interopRequireDefault(require("../images/avatars/kieu-trinh.png"));
+var _duyNguyen = _interopRequireDefault(require("../images/avatars/duy-nguyen.jpeg"));
+var _ducManh = _interopRequireDefault(require("../images/avatars/duc-manh.jpg"));
+var _tuNguyen = _interopRequireDefault(require("../images/avatars/tu-nguyen.jpg"));
+var _ = _interopRequireDefault(require("../images/shapes/34.jpg"));
 var _me = _interopRequireDefault(require("../images/me.jpg"));
 var _me2 = _interopRequireDefault(require("../images/me2.jpg"));
 var _me3 = _interopRequireDefault(require("../images/me3.jpg"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var images = {
-  avatar1: _.default,
-  avatar2: _2.default,
-  avatar3: _3.default,
-  avatar4: _4.default,
-  avatar5: _5.default,
-  avatar6: _6.default,
-  avatar7: _7.default,
-  bg: _8.default,
+  khanhAvatar: _vanKhanh.default,
+  trinhAvatar: _kieuTrinh.default,
+  duyAvatar: _duyNguyen.default,
+  manhAvatar: _ducManh.default,
+  tuAvatar: _tuNguyen.default,
+  bg: _.default,
   me1: _me.default,
   me2: _me2.default,
   me3: _me3.default
 };
 var _default = images;
 exports.default = _default;
-},{"../images/avatars/1.png":"assets/images/avatars/1.png","../images/avatars/2.png":"assets/images/avatars/2.png","../images/avatars/3.png":"assets/images/avatars/3.png","../images/avatars/4.png":"assets/images/avatars/4.png","../images/avatars/5.png":"assets/images/avatars/5.png","../images/avatars/6.png":"assets/images/avatars/6.png","../images/avatars/7.png":"assets/images/avatars/7.png","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/shaders/vertex.glsl":[function(require,module,exports) {
+},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.png":"assets/images/avatars/kieu-trinh.png","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/shaders/vertex.glsl":[function(require,module,exports) {
 module.exports = "#define GLSLIFY 1\nuniform sampler2D uTexture;\nuniform vec2 uOffset;\nvarying vec2 vUv;\n\nfloat M_PI = 3.141529;\n\nvec3 deformationCurve(vec3 position, vec2 uv, vec2 offset) \n{\n    position.x = position.x + (sin(uv.y * M_PI) * offset.x);\n    position.y = position.y + (sin(uv.x * M_PI) * offset.y);\n    return position;\n}\n\nvoid main() \n{\n    vUv = uv;\n    vec3 newPosition = deformationCurve(position, uv, uOffset);\n    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);\n}";
 },{}],"assets/shaders/fragment.glsl":[function(require,module,exports) {
 module.exports = "#define GLSLIFY 1\nuniform sampler2D uTexture;\nuniform float uAlpha;\nuniform vec2 uOffset;\nvarying vec2 vUv;\n\nvec3 rgbShift(sampler2D textureImage, vec2 uv, vec2 offset)\n{\n    float r = texture2D(textureImage, uv + offset).r;\n    vec2 gb = texture2D(textureImage, uv).gb;\n    return vec3(r, gb);\n}\n\nvoid main() \n{\n    vec3 color = rgbShift(uTexture, vUv, uOffset);\n    gl_FragColor = vec4(color, uAlpha);\n}";
@@ -36410,7 +36402,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61206" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55948" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -3,7 +3,6 @@
     position: relative;
     background: $darkish-blue;
     color: #fff;
-    display: none;
 
     &__header {
         display: flex;
@@ -20,7 +19,7 @@
                 left: 20px;
                 width: 30%;
                 height: 120%;
-                border-left: 2px solid $red-color;
+                border-left: 2px solid $accent-blue-color;
                 border-radius: 50%;
                 transform: rotate(-20deg);
                 box-shadow: 0 8px 32px 0 $box-shadow-blue2;
@@ -38,7 +37,7 @@
                 width: 150px;
                 height: 150px;
                 border-radius: 50%;
-                border-right: 2px solid $red-color;
+                border-right: 2px solid $accent-blue-color;
                 object-fit: cover;
             }
 
@@ -94,7 +93,7 @@
 
     & svg {
         width: 30px;
-        fill: $red-color;
+        fill: $accent-blue-color;
         height: max-content;
 
         @media (min-width: 500px) {
@@ -119,7 +118,11 @@
             font-family: sans-serif;
             font-size: 30px;
             font-weight: 600;
-            color: $red-color;
+            color: $accent-blue-color;
+        }
+
+        p {
+            display: inline;
         }
     }
 
@@ -155,7 +158,8 @@
 }
 
 
-.swiper-slide-active {
+.swiper-slide-active, 
+.swiper-slide-active + .swiper-slide:last-of-type {
     filter: blur(0) !important;
     transform: scale(1);
 }
