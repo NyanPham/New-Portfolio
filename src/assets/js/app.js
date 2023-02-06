@@ -1,15 +1,18 @@
-import StartLoading from "./loader.js";
+import StartLoading, { removeHashInURL } from "./loader.js";
 import initSwiper from "./swiper.js";
-import Scrollbar, { initScrollBar } from "./smoothScroll.js";
+import { initScrollBar } from "./smoothScroll.js";
 import "./faq.js";
 import "./scrollDown.js";
 
 StartLoading();
 initSwiper();
+initBackToTopButton();
 RunAnimationWhenInView();
 
+let smoothScrollBar;
+
 document.addEventListener("initSmoothScroll", () => {
-    initScrollBar();
+    smoothScrollBar = initScrollBar();
 });
 
 function RunAnimationWhenInView() {
@@ -29,4 +32,11 @@ function RunAnimationWhenInView() {
     );
 
     animateElemets.forEach((elem) => observer.observe(elem));
+}
+
+function initBackToTopButton() {
+    document.getElementById("scroll-to-top").addEventListener("click", () => {
+        smoothScrollBar.scrollTo(0, 0, 1000);
+        removeHashInURL();
+    });
 }

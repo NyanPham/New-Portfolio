@@ -42109,6 +42109,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+exports.removeHashInURL = removeHashInURL;
 var _gsap = _interopRequireDefault(require("gsap"));
 var _imagesloaded = _interopRequireDefault(require("imagesloaded"));
 var _threeBg = require("./threeBg");
@@ -42117,70 +42118,76 @@ var bar = document.querySelector("[data-loading-bar-inner]");
 var counter_num = document.querySelector("[data-loading-counter-number]");
 var c = 0;
 function StartLoading() {
-  var barInterval = setInterval(function () {
-    bar.style.width = c + "%";
-    counter_num.innerText = c + "%";
-    c++;
-    if (c === 101) {
-      clearInterval(barInterval);
-      _gsap.default.to(".loading__bar", {
-        duration: 5,
-        rotate: "90deg",
-        left: "1000%"
-      });
-      _gsap.default.to(".loading__text, .loading__counter", {
-        duration: 0.5,
-        opacity: 0
-      });
-      _gsap.default.to(".loading__box", {
-        duration: 1,
-        height: "500px",
-        borderRadius: "50%"
+  window.requestAnimationFrame(Interval);
+}
+function Interval() {
+  bar.style.width = c + "%";
+  counter_num.innerText = c + "%";
+  c++;
+  if (c === 101) {
+    removeHashInURL();
+    _gsap.default.to(".loading__bar", {
+      duration: 5,
+      rotate: "90deg",
+      left: "1000%"
+    });
+    _gsap.default.to(".loading__text, .loading__counter", {
+      duration: 0.5,
+      opacity: 0
+    });
+    _gsap.default.to(".loading__box", {
+      duration: 1,
+      height: "500px",
+      borderRadius: "50%"
+    });
+    _gsap.default.to(".loading__svg", {
+      duration: 10,
+      opacity: 1,
+      rotate: "360deg"
+    });
+    _gsap.default.to(".loading__box", {
+      delay: 2,
+      border: "none"
+    });
+    (0, _imagesloaded.default)(document.querySelectorAll("img"), function () {
+      _gsap.default.to(".loading", {
+        delay: 2,
+        duration: 2,
+        zIndex: 1,
+        background: "transparent",
+        opacity: 0.5,
+        pointerEvents: "none"
       });
       _gsap.default.to(".loading__svg", {
-        duration: 10,
-        opacity: 1,
+        delay: 2,
+        duration: 100,
         rotate: "360deg"
       });
-      _gsap.default.to(".loading__box", {
+      _gsap.default.to("header", {
+        duration: 1,
         delay: 2,
-        border: "none"
+        top: "0"
       });
-      (0, _imagesloaded.default)(document.querySelectorAll("img"), function () {
-        _gsap.default.to(".loading", {
-          delay: 2,
-          duration: 2,
-          zIndex: 1,
-          background: "transparent",
-          opacity: 0.5,
-          pointerEvents: "none"
-        });
-        _gsap.default.to(".loading__svg", {
-          delay: 2,
-          duration: 100,
-          rotate: "360deg"
-        });
-        _gsap.default.to("header", {
-          duration: 1,
-          delay: 2,
-          top: "0"
-        });
-        _gsap.default.to(".socials", {
-          duration: 1,
-          delay: 2.5,
-          bottom: "10rem"
-        });
-        _gsap.default.to(".scrollDown", {
-          duration: 1,
-          delay: 3,
-          bottom: "5.5rem"
-        });
-        setTimeout(function () {
-          document.dispatchEvent(new CustomEvent("initSmoothScroll"));
-        }, 2000);
+      _gsap.default.to(".socials", {
+        duration: 1,
+        delay: 2.5,
+        bottom: "10rem"
       });
-    }
-  }, 20);
+      _gsap.default.to(".scrollDown", {
+        duration: 1,
+        delay: 3,
+        bottom: "5.5rem"
+      });
+      setTimeout(function () {
+        document.dispatchEvent(new CustomEvent("initSmoothScroll"));
+      }, 2000);
+    });
+    return;
+  }
+  window.requestAnimationFrame(Interval);
+}
+function removeHashInURL() {
+  history.pushState("", document.title, window.location.pathname + window.location.search);
 }
 var _default = StartLoading;
 exports.default = _default;
@@ -58373,7 +58380,19 @@ _smoothScrollbar.default.use(AnchorPlugin);
 _smoothScrollbar.default.use(DisableScrollPlugin);
 function initScrollBar() {
   var pageSmoothScroll = _smoothScrollbar.default.init(document.body, options);
+  var scrollToTop = document.getElementById("scroll-to-top");
+  var header = document.getElementById("header");
   pageSmoothScroll.track.xAxis.element.remove();
+  pageSmoothScroll.addListener(function (_ref) {
+    var offset = _ref.offset;
+    updatePosition(scrollToTop, offset);
+    updatePosition(header, offset);
+  });
+  return pageSmoothScroll;
+}
+function updatePosition(element, offset) {
+  element.classList.toggle("show", offset.y > window.innerHeight / 2);
+  element.style.setProperty("--raw-top", offset.y);
 }
 var _default = _smoothScrollbar.default;
 exports.default = _default;
@@ -58398,27 +58417,29 @@ questions.forEach(function (question) {
 },{}],"assets/js/scrollDown.js":[function(require,module,exports) {
 var scrollDownElem = document.querySelector("[data-scroll-down]");
 scrollDownElem.addEventListener("click", function () {
-  document.getElementById("skills").scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
+  var a = document.createElement("a");
+  a.href = "#skills";
+  a.click();
+  a.remove();
 });
 },{}],"assets/js/app.js":[function(require,module,exports) {
 "use strict";
 
-var _loader = _interopRequireDefault(require("./loader.js"));
+var _loader = _interopRequireWildcard(require("./loader.js"));
 var _swiper = _interopRequireDefault(require("./swiper.js"));
-var _smoothScroll = _interopRequireWildcard(require("./smoothScroll.js"));
+var _smoothScroll = require("./smoothScroll.js");
 require("./faq.js");
 require("./scrollDown.js");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 (0, _loader.default)();
 (0, _swiper.default)();
+initBackToTopButton();
 RunAnimationWhenInView();
+var smoothScrollBar;
 document.addEventListener("initSmoothScroll", function () {
-  (0, _smoothScroll.initScrollBar)();
+  smoothScrollBar = (0, _smoothScroll.initScrollBar)();
 });
 function RunAnimationWhenInView() {
   var animateElemets = document.querySelectorAll("[data-animation-in-view]");
@@ -58431,6 +58452,12 @@ function RunAnimationWhenInView() {
   });
   animateElemets.forEach(function (elem) {
     return observer.observe(elem);
+  });
+}
+function initBackToTopButton() {
+  document.getElementById("scroll-to-top").addEventListener("click", function () {
+    smoothScrollBar.scrollTo(0, 0, 1000);
+    (0, _loader.removeHashInURL)();
   });
 }
 },{"./loader.js":"assets/js/loader.js","./swiper.js":"assets/js/swiper.js","./smoothScroll.js":"assets/js/smoothScroll.js","./faq.js":"assets/js/faq.js","./scrollDown.js":"assets/js/scrollDown.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {

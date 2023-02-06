@@ -497,6 +497,42 @@ ul {
 .landing canvas {
   position: absolute;
 }
+
+.scroll-to-top {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  pointer-events: none;
+  background-color: #fff;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.67);
+  transform: translate3d(0, calc(var(--raw-top) * 1px + 87vh), 0);
+  transition: background-color 0.5s ease-in-out;
+}
+.scroll-to-top.show {
+  display: flex;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.scroll-to-top:hover {
+  background-color: #eeeeee;
+}
+.scroll-to-top:hover svg {
+  fill: #2169f3;
+}
+.scroll-to-top svg {
+  width: 1rem;
+  height: 1rem;
+  fill: #4299e1;
+  transition: fill 0.5s ease-in-out;
+}
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
 * {
   margin: 0;

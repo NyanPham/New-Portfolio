@@ -79,8 +79,22 @@ Scrollbar.use(AnchorPlugin);
 Scrollbar.use(DisableScrollPlugin);
 
 export function initScrollBar() {
-    let pageSmoothScroll = Scrollbar.init(document.body, options);
+    const pageSmoothScroll = Scrollbar.init(document.body, options);
+    const scrollToTop = document.getElementById("scroll-to-top");
+    const header = document.getElementById("header");
     pageSmoothScroll.track.xAxis.element.remove();
+
+    pageSmoothScroll.addListener(({ offset }) => {
+        updatePosition(scrollToTop, offset);
+        updatePosition(header, offset);
+    });
+
+    return pageSmoothScroll;
+}
+
+function updatePosition(element, offset) {
+    element.classList.toggle("show", offset.y > window.innerHeight / 2);
+    element.style.setProperty("--raw-top", offset.y);
 }
 
 export default Scrollbar;
