@@ -43,6 +43,11 @@
         position: relative;
         width: 100vw;
         height: 700px;
+
+        @media (max-width: 440px) {
+            height: 100vh;
+        }
+
         img {
             width: 60vw;
             height: 600px;
@@ -50,6 +55,28 @@
             position: absolute;
             right: 10vw;
             top: 3rem;
+
+            &:not(.show-sm) {
+                display: block;
+            }
+
+            &.show-sm {
+                display: none;
+            }
+
+            @media (max-width: 440px) {
+                & {
+                    top: 10rem;
+                }
+
+                &:not(.show-sm) {
+                    display: none;
+                }
+
+                &.show-sm {
+                    display: block;
+                }
+            }
         }
     }
 

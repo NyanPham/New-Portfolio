@@ -1975,6 +1975,11 @@ button.swiper-pagination-bullet {
   width: 100vw;
   height: 700px;
 }
+@media (max-width: 440px) {
+  .project__img {
+    height: 100vh;
+  }
+}
 .project__img img {
   width: 60vw;
   height: 600px;
@@ -1982,6 +1987,23 @@ button.swiper-pagination-bullet {
   position: absolute;
   right: 10vw;
   top: 3rem;
+}
+.project__img img:not(.show-sm) {
+  display: block;
+}
+.project__img img.show-sm {
+  display: none;
+}
+@media (max-width: 440px) {
+  .project__img img {
+    top: 10rem;
+  }
+  .project__img img:not(.show-sm) {
+    display: none;
+  }
+  .project__img img.show-sm {
+    display: block;
+  }
 }
 .project__links {
   padding-top: 2rem;
