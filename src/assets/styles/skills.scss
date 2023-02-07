@@ -16,12 +16,33 @@
     &__text {
         position: absolute;
         white-space: nowrap;
+
+        &--left,
+        &--right {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+
+            [data-slide] {
+                display: block;
+            }
+        }
+
         &--left {
             left: 0;
             top: 7rem;
-            
+            justify-content: flex-end;
+
+            [data-slide] {
+                --left: 0;
+            }
+
             &.in-view {
                 animation: moveLeft 15s linear infinite;
+
+                [data-slide] {
+                    transform: translateX(calc(var(--left) * 1px));
+                }
             }
 
             @keyframes moveLeft {
@@ -36,9 +57,18 @@
         &--right {
             right: 0;
             top: 12rem;
-                
+            justify-content: flex-start;
+
+            [data-slide] {
+                --right: 0;
+            }
+            
             &.in-view {
                 animation: moveRight 15s linear infinite;
+
+                [data-slide] {
+                    transform: translateX(calc(var(--right) * 1px));
+                }
             }
 
             @keyframes moveRight {
