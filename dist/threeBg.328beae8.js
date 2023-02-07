@@ -36152,14 +36152,16 @@ if (typeof window !== 'undefined') {
 }
 },{}],"assets/images/avatars/van-khanh.jpg":[function(require,module,exports) {
 module.exports = "/van-khanh.8e2c93b6.jpg";
-},{}],"assets/images/avatars/kieu-trinh.png":[function(require,module,exports) {
-module.exports = "/kieu-trinh.b2dbed3e.png";
+},{}],"assets/images/avatars/kieu-trinh.jpg":[function(require,module,exports) {
+module.exports = "/kieu-trinh.cefa6afc.jpg";
 },{}],"assets/images/avatars/duy-nguyen.jpeg":[function(require,module,exports) {
 module.exports = "/duy-nguyen.64b5f196.jpeg";
 },{}],"assets/images/avatars/duc-manh.jpg":[function(require,module,exports) {
 module.exports = "/duc-manh.d3206bd4.jpg";
 },{}],"assets/images/avatars/tu-nguyen.jpg":[function(require,module,exports) {
 module.exports = "/tu-nguyen.7d7e32aa.jpg";
+},{}],"assets/images/avatars/hoanh.jpeg":[function(require,module,exports) {
+module.exports = "/hoanh.760a96f6.jpeg";
 },{}],"assets/images/shapes/34.jpg":[function(require,module,exports) {
 module.exports = "/34.a9943b2a.jpg";
 },{}],"assets/images/me.jpg":[function(require,module,exports) {
@@ -36176,10 +36178,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _vanKhanh = _interopRequireDefault(require("../images/avatars/van-khanh.jpg"));
-var _kieuTrinh = _interopRequireDefault(require("../images/avatars/kieu-trinh.png"));
+var _kieuTrinh = _interopRequireDefault(require("../images/avatars/kieu-trinh.jpg"));
 var _duyNguyen = _interopRequireDefault(require("../images/avatars/duy-nguyen.jpeg"));
 var _ducManh = _interopRequireDefault(require("../images/avatars/duc-manh.jpg"));
 var _tuNguyen = _interopRequireDefault(require("../images/avatars/tu-nguyen.jpg"));
+var _hoanh = _interopRequireDefault(require("../images/avatars/hoanh.jpeg"));
 var _ = _interopRequireDefault(require("../images/shapes/34.jpg"));
 var _me = _interopRequireDefault(require("../images/me.jpg"));
 var _me2 = _interopRequireDefault(require("../images/me2.jpg"));
@@ -36191,6 +36194,7 @@ var images = {
   duyAvatar: _duyNguyen.default,
   manhAvatar: _ducManh.default,
   tuAvatar: _tuNguyen.default,
+  hoanhAvatar: _hoanh.default,
   bg: _.default,
   me1: _me.default,
   me2: _me2.default,
@@ -36198,7 +36202,7 @@ var images = {
 };
 var _default = images;
 exports.default = _default;
-},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.png":"assets/images/avatars/kieu-trinh.png","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/js/threeBg.js":[function(require,module,exports) {
+},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.jpg":"assets/images/avatars/kieu-trinh.jpg","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/avatars/hoanh.jpeg":"assets/images/avatars/hoanh.jpeg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/js/threeBg.js":[function(require,module,exports) {
 "use strict";
 
 var THREE = _interopRequireWildcard(require("three"));
@@ -36289,7 +36293,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55948" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56513" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

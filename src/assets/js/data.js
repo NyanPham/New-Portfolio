@@ -31,6 +31,12 @@ let reviews = [
         image: images.tuAvatar,
         review: "Nhan has a great manner of self-study, and learning from others. Though he's just joined the theme development for a couple of months, he could analyze and fix complex certain bugs of the theme. However, he still has much room for improvement, such as code management and his social skills. My message to Nhan: stop being shy, trust yourself more so that you can be the best of version of you. I believe in you.",
     },
+    {       
+        name: "Hoanh",
+        position: "HR Department",
+        image: images.hoanhAvatar,
+        review: "At work, he's really perceptive and a fast learner. In spite of not having graduated from any IT university, he's managed to transition to the programming field, which means he has a strong self-learning manner. Nhan is also detail-oriented and supportive to others. However, he's easy to get stressed somtimes, so I hope he would be able to deal with it in the future.",
+    },
 ];
 
 export { reviews };

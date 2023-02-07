@@ -76,6 +76,12 @@
     display: flex;
     font-size: 16px;
     padding: 5px;
+    user-select: none;
+
+    @media (max-width: 650px) {
+        padding-left: 0;
+        padding-right: 0;
+    }
 
     &__card {
         position: relative;
@@ -87,6 +93,9 @@
             & {
                 font-size: 18px;
                 font-family: sans-serif;
+
+                padding-top: 1rem;
+                flex-direction: column;
             }
         }
     }
@@ -114,6 +123,7 @@
 
     &__text {
         user-select: none;
+        margin-right: 0.3rem;
         span {
             font-family: sans-serif;
             font-size: 30px;
@@ -123,6 +133,10 @@
 
         p {
             display: inline;
+        }
+
+        @media (max-width: 650px) {
+            order: 2;
         }
     }
 
@@ -138,6 +152,13 @@
                 height: 150px;
             }
         }
+
+        @media (max-width: 650px) {
+            order: 1;
+            margin-left: auto;
+            margin-right: auto;
+            transform: translateX(-15px);
+        }
     }
 
     &__profile {
@@ -148,6 +169,15 @@
         flex-direction: column;
         font-family: serif;
         font-size: 17px;
+
+        @media (max-width: 650px) {
+            & {
+                text-align: center;
+                left: 50%;
+                transform: translateX(calc(-50% - 1rem));
+                bottom: -3.25rem;
+            }
+        }
     }
 }
 
@@ -157,9 +187,7 @@
     transition: all 0.2s ease;
 }
 
-
-.swiper-slide-active, 
-.swiper-slide-active + .swiper-slide:last-of-type {
+.swiper-slide-active {
     filter: blur(0) !important;
     transform: scale(1);
 }
@@ -177,6 +205,12 @@
     @media (min-width: 1056px) {
         & {
             flex-direction: row;
+        }
+    }
+
+    @media (max-width: 650px) {
+        & {
+            padding: 0;
         }
     }
 }
@@ -208,6 +242,12 @@
 
         &:hover {
             background: #ffffff21;
+        }
+
+        @media (max-width: 650px) {
+            &:last-of-type {
+                margin-right: 0;
+            }
         }
     }
 }

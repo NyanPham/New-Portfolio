@@ -23,13 +23,14 @@ function Interval() {
             rotate: "90deg",
             left: "1000%",
         });
+        
         gsap.to(".loading__text, .loading__counter", {
             duration: 0.5,
             opacity: 0,
         });
         gsap.to(".loading__box", {
             duration: 1,
-            height: "500px",
+            height: window.innerWidth > 600 ? "500px" : "90vw",
             borderRadius: "50%",
         });
         gsap.to(".loading__svg", {

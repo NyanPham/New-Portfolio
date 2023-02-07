@@ -41990,14 +41990,16 @@ if (typeof window !== 'undefined') {
 }
 },{}],"assets/images/avatars/van-khanh.jpg":[function(require,module,exports) {
 module.exports = "/van-khanh.8e2c93b6.jpg";
-},{}],"assets/images/avatars/kieu-trinh.png":[function(require,module,exports) {
-module.exports = "/kieu-trinh.b2dbed3e.png";
+},{}],"assets/images/avatars/kieu-trinh.jpg":[function(require,module,exports) {
+module.exports = "/kieu-trinh.cefa6afc.jpg";
 },{}],"assets/images/avatars/duy-nguyen.jpeg":[function(require,module,exports) {
 module.exports = "/duy-nguyen.64b5f196.jpeg";
 },{}],"assets/images/avatars/duc-manh.jpg":[function(require,module,exports) {
 module.exports = "/duc-manh.d3206bd4.jpg";
 },{}],"assets/images/avatars/tu-nguyen.jpg":[function(require,module,exports) {
 module.exports = "/tu-nguyen.7d7e32aa.jpg";
+},{}],"assets/images/avatars/hoanh.jpeg":[function(require,module,exports) {
+module.exports = "/hoanh.760a96f6.jpeg";
 },{}],"assets/images/shapes/34.jpg":[function(require,module,exports) {
 module.exports = "/34.a9943b2a.jpg";
 },{}],"assets/images/me.jpg":[function(require,module,exports) {
@@ -42014,10 +42016,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _vanKhanh = _interopRequireDefault(require("../images/avatars/van-khanh.jpg"));
-var _kieuTrinh = _interopRequireDefault(require("../images/avatars/kieu-trinh.png"));
+var _kieuTrinh = _interopRequireDefault(require("../images/avatars/kieu-trinh.jpg"));
 var _duyNguyen = _interopRequireDefault(require("../images/avatars/duy-nguyen.jpeg"));
 var _ducManh = _interopRequireDefault(require("../images/avatars/duc-manh.jpg"));
 var _tuNguyen = _interopRequireDefault(require("../images/avatars/tu-nguyen.jpg"));
+var _hoanh = _interopRequireDefault(require("../images/avatars/hoanh.jpeg"));
 var _ = _interopRequireDefault(require("../images/shapes/34.jpg"));
 var _me = _interopRequireDefault(require("../images/me.jpg"));
 var _me2 = _interopRequireDefault(require("../images/me2.jpg"));
@@ -42029,6 +42032,7 @@ var images = {
   duyAvatar: _duyNguyen.default,
   manhAvatar: _ducManh.default,
   tuAvatar: _tuNguyen.default,
+  hoanhAvatar: _hoanh.default,
   bg: _.default,
   me1: _me.default,
   me2: _me2.default,
@@ -42036,7 +42040,7 @@ var images = {
 };
 var _default = images;
 exports.default = _default;
-},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.png":"assets/images/avatars/kieu-trinh.png","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/js/threeBg.js":[function(require,module,exports) {
+},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.jpg":"assets/images/avatars/kieu-trinh.jpg","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/avatars/hoanh.jpeg":"assets/images/avatars/hoanh.jpeg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/js/threeBg.js":[function(require,module,exports) {
 "use strict";
 
 var THREE = _interopRequireWildcard(require("three"));
@@ -42137,7 +42141,7 @@ function Interval() {
     });
     _gsap.default.to(".loading__box", {
       duration: 1,
-      height: "500px",
+      height: window.innerWidth > 600 ? "500px" : "90vw",
       borderRadius: "50%"
     });
     _gsap.default.to(".loading__svg", {
@@ -51926,6 +51930,11 @@ var reviews = [{
   position: "Ex-Product Manager",
   image: _images.default.tuAvatar,
   review: "Nhan has a great manner of self-study, and learning from others. Though he's just joined the theme development for a couple of months, he could analyze and fix complex certain bugs of the theme. However, he still has much room for improvement, such as code management and his social skills. My message to Nhan: stop being shy, trust yourself more so that you can be the best of version of you. I believe in you."
+}, {
+  name: "Hoanh",
+  position: "HR Department",
+  image: _images.default.hoanhAvatar,
+  review: "At work, he's really perceptive and a fast learner. In spite of not having graduated from any IT university, he's managed to transition to the programming field, which means he has a strong self-learning manner. Nhan is also detail-oriented and supportive to others. However, he's easy to get stressed somtimes, so I hope he would be able to deal with it in the future."
 }];
 exports.reviews = reviews;
 },{"./images":"assets/js/images.js"}],"assets/js/swiper.js":[function(require,module,exports) {
@@ -51944,30 +51953,6 @@ var swiperContainer = document.querySelector("[data-swiper-wrapper]");
 
 // review swiper
 _swiper.default.use([_swiper.Pagination, _swiper.Navigation]);
-var swiper = new _swiper.default(".swiper", {
-  slidesPerView: 1,
-  spaceBetween: 30,
-  pagination: {
-    el: ".swiper-pagination",
-    type: "bullets",
-    clickable: true
-  },
-  navigation: {
-    prevEl: ".swiper-button-prev",
-    nextEl: ".swiper-button-next"
-  },
-  breakpoints: {
-    850: {
-      slidesPerView: 2
-    },
-    1400: {
-      slidesPerView: 3
-    },
-    1900: {
-      slidesPerView: 5
-    }
-  }
-});
 function initSwiper() {
   _data.reviews.map(function (review) {
     var reviewNode = reviewTemplate.content.cloneNode(true);
@@ -51977,6 +51962,31 @@ function initSwiper() {
     reviewNode.querySelector("[data-review-name]").innerText = review.name;
     reviewNode.querySelector("[data-review-position]").innerText = review.position;
     swiperContainer.appendChild(reviewNode);
+  });
+  var swiper = new _swiper.default(".swiper", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      type: "bullets",
+      clickable: true
+    },
+    navigation: {
+      prevEl: ".swiper-button-prev",
+      nextEl: ".swiper-button-next"
+    },
+    breakpoints: {
+      850: {
+        slidesPerView: 2
+      },
+      1400: {
+        slidesPerView: 3
+      },
+      1950: {
+        slidesPerView: 4
+      }
+    }
   });
 }
 var _default = initSwiper;
@@ -58485,7 +58495,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55948" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56513" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

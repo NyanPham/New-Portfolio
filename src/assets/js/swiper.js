@@ -6,30 +6,6 @@ const swiperContainer = document.querySelector("[data-swiper-wrapper]");
 
 // review swiper
 Swiper.use([Pagination, Navigation]);
-var swiper = new Swiper(".swiper", {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    pagination: {
-        el: ".swiper-pagination",
-        type: "bullets",
-        clickable: true,
-    },
-    navigation: {
-        prevEl: ".swiper-button-prev",
-        nextEl: ".swiper-button-next",
-    },
-    breakpoints: {
-        850: {
-            slidesPerView: 2,
-        },
-        1400: {
-            slidesPerView: 3,
-        },
-        1900: {
-            slidesPerView: 5,
-        },
-    },
-});
 
 function initSwiper() {
     reviews.map((review) => {
@@ -44,6 +20,32 @@ function initSwiper() {
             review.position;
 
         swiperContainer.appendChild(reviewNode);
+    });
+
+    var swiper = new Swiper(".swiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+            el: ".swiper-pagination",
+            type: "bullets",
+            clickable: true,
+        },  
+        navigation: {
+            prevEl: ".swiper-button-prev",
+            nextEl: ".swiper-button-next",
+        },      
+        breakpoints: {
+            850: {
+                slidesPerView: 2,
+            },
+            1400: {
+                slidesPerView: 3,
+            },      
+            1950: {
+                slidesPerView: 4,
+            },
+        },
     });
 }
 

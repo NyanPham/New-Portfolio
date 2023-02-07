@@ -64,6 +64,13 @@
                 display: none;
             }
         }
+
+        @media (min-width: 1351px) {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            height: max-content;
+        }
     }
     
     &__tags {

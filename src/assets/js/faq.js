@@ -1,4 +1,5 @@
 const questions = [...document.querySelectorAll("[data-question]")];
+
 questions.forEach((question) => {
     question.addEventListener("click", () => {
         question.classList.toggle("open");
