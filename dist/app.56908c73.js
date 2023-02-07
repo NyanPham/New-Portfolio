@@ -58432,43 +58432,6 @@ scrollDownElem.addEventListener("click", function () {
   a.click();
   a.remove();
 });
-},{}],"assets/js/skills.js":[function(require,module,exports) {
-var slideSkills = document.querySelectorAll('[data-slide]');
-var lastTime = 0;
-var slideLeftWidth = document.querySelector("[data-slide='left']").getBoundingClientRect().width;
-var slideRightWidth = document.querySelector("[data-slide='right']").getBoundingClientRect().width;
-function skillsSlide(time) {
-  var delta = time - lastTime;
-  lastTime = time;
-  slideSkills.forEach(function (slide) {
-    if (slide.dataset.slide === 'left') {
-      slideToLeft(slide, delta);
-    } else {
-      slideToRight(slide, delta);
-    }
-  });
-  window.requestAnimationFrame(skillsSlide);
-}
-
-// window.requestAnimationFrame(skillsSlide);
-
-function slideToLeft(slide, deltaTime) {
-  increasePropertyValue(slide, '--left', deltaTime / 100);
-  slide.style.transform = "translateX(".concat(getPropertyValue(slide, '--left'), ")");
-}
-function slideToRight(slide, deltaTime) {
-  increasePropertyValue(slide, '--right', deltaTime / 100);
-  slide.style.transform = "translateX(".concat(getPropertyValue(slide, '--right'), ")");
-}
-function getPropertyValue(elem, prop) {
-  return parseInt(getComputedStyle(elem).getPropertyValue(prop));
-}
-function setPropertyValue(elem, prop, value) {
-  elem.style.setProperty(prop, value);
-}
-function increasePropertyValue(elem, prop, amount) {
-  setPropertyValue(elem, prop, getPropertyValue(elem, prop) + amount);
-}
 },{}],"assets/js/app.js":[function(require,module,exports) {
 "use strict";
 
@@ -58477,7 +58440,6 @@ var _swiper = _interopRequireDefault(require("./swiper.js"));
 var _smoothScroll = require("./smoothScroll.js");
 require("./faq.js");
 require("./scrollDown.js");
-require("./skills.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -58508,7 +58470,7 @@ function initBackToTopButton() {
     (0, _loader.removeHashInURL)();
   });
 }
-},{"./loader.js":"assets/js/loader.js","./swiper.js":"assets/js/swiper.js","./smoothScroll.js":"assets/js/smoothScroll.js","./faq.js":"assets/js/faq.js","./scrollDown.js":"assets/js/scrollDown.js","./skills.js":"assets/js/skills.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./loader.js":"assets/js/loader.js","./swiper.js":"assets/js/swiper.js","./smoothScroll.js":"assets/js/smoothScroll.js","./faq.js":"assets/js/faq.js","./scrollDown.js":"assets/js/scrollDown.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -58533,7 +58495,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61958" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53279" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

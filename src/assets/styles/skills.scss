@@ -16,19 +16,14 @@
     &__text {
         position: absolute;
         white-space: nowrap;
-
         &--left,
         &--right {
-            display: flex;
-            align-items: center;
-            flex-wrap: nowrap;
+            will-change: transform;
         }
 
         &--left {
             left: 0;
             top: 7rem;
-            justify-content: flex-end;
-
            
             &.in-view {
                 animation: moveLeft 15s linear infinite;
@@ -46,7 +41,6 @@
         &--right {
             right: 0;
             top: 12rem;
-            justify-content: flex-start;
 
             &.in-view {
                 animation: moveRight 15s linear infinite;
