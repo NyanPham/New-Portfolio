@@ -163,7 +163,7 @@ ul {
   height: 100%;
   width: 0%;
   border-right: 2px;
-  background: linear-gradient(to left, #6cff8d, #00A9E9);
+  background: linear-gradient(to left, #6cff8d, #00A9E9, #00A9E9);
 }
 .loading__text {
   position: relative;

@@ -42,9 +42,9 @@
         &--inner {
             height: 100%;
             width: 0%;
-            border-right: 2px;
-            background: linear-gradient(to left, $green-color, $green-blue-color);
-        }
+            border-right: 2px;  
+            background: linear-gradient(to left, $green-color, $green-blue-color, $green-blue-color);
+        }   
     }
 
     &__text {
