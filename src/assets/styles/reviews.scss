@@ -134,10 +134,11 @@
 
         p {
             display: inline;
-        }
+        }   
 
         @media (max-width: 650px) {
             order: 2;
+            margin-top: 25px;
         }
     }
 
@@ -170,13 +171,14 @@
         flex-direction: column;
         font-family: serif;
         font-size: 17px;
-
+        
         @media (max-width: 650px) {
             & {
                 text-align: center;
                 left: 50%;
                 transform: translateX(calc(-50% - 1rem));
-                bottom: -3.25rem;
+                bottom: -2.5rem;
+                width: max-content;
             }
         }
     }
