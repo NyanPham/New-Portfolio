@@ -42153,43 +42153,41 @@ function Interval() {
       delay: 2,
       border: "none"
     });
-    // imagesLoaded(document.querySelectorAll("img"), () => {
-    //     gsap.to(".loading", {
-    //         delay: 2,
-    //         duration: 2,
-    //         zIndex: 1,
-    //         background: "transparent",
-    //         opacity: 0.5,
-    //         pointerEvents: "none",
-    //     });
-    //     gsap.to(".loading__svg", {
-    //         delay: 2,
-    //         duration: 100,
-    //         rotate: "360deg",
-    //     });
-    //     gsap.to("header", {
-    //         duration: 1,
-    //         delay: 2,
-    //         top: "0",
-    //     });
-    //     gsap.to(".socials", {
-    //         duration: 1,
-    //         delay: 2.5,
-    //         bottom: "10rem",
-    //     });
-    //     gsap.to(".scrollDown", {
-    //         duration: 1,
-    //         delay: 3,
-    //         bottom: "5.5rem",
-    //     });
-
-    //     setTimeout(() => {
-    //         document.dispatchEvent(new CustomEvent("initSmoothScroll"));
-    //     }, 2000);
-    // });  
-    // return;
+    (0, _imagesloaded.default)(document.querySelectorAll("img"), function () {
+      _gsap.default.to(".loading", {
+        delay: 2,
+        duration: 2,
+        zIndex: 1,
+        background: "transparent",
+        opacity: 0.5,
+        pointerEvents: "none"
+      });
+      _gsap.default.to(".loading__svg", {
+        delay: 2,
+        duration: 100,
+        rotate: "360deg"
+      });
+      _gsap.default.to("header", {
+        duration: 1,
+        delay: 2,
+        top: "0"
+      });
+      _gsap.default.to(".socials", {
+        duration: 1,
+        delay: 2.5,
+        bottom: "10rem"
+      });
+      _gsap.default.to(".scrollDown", {
+        duration: 1,
+        delay: 3,
+        bottom: "5.5rem"
+      });
+      setTimeout(function () {
+        document.dispatchEvent(new CustomEvent("initSmoothScroll"));
+      }, 2000);
+    });
+    return;
   }
-
   window.requestAnimationFrame(Interval);
 }
 function removeHashInURL() {
@@ -58424,12 +58422,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 var questions = _toConsumableArray(document.querySelectorAll("[data-question]"));
 questions.forEach(function (question) {
   question.addEventListener("click", function () {
-    question.classList.toggle("open");
     questions.filter(function (q) {
       return q !== question;
     }).forEach(function (q) {
       return q.classList.remove("open");
     });
+    question.classList.toggle("open");
   });
 });
 },{}],"assets/js/scrollDown.js":[function(require,module,exports) {
@@ -58504,7 +58502,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65055" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53217" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

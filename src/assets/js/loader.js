@@ -42,41 +42,41 @@ function Interval() {
             delay: 2,
             border: "none",
         });
-        // imagesLoaded(document.querySelectorAll("img"), () => {
-        //     gsap.to(".loading", {
-        //         delay: 2,
-        //         duration: 2,
-        //         zIndex: 1,
-        //         background: "transparent",
-        //         opacity: 0.5,
-        //         pointerEvents: "none",
-        //     });
-        //     gsap.to(".loading__svg", {
-        //         delay: 2,
-        //         duration: 100,
-        //         rotate: "360deg",
-        //     });
-        //     gsap.to("header", {
-        //         duration: 1,
-        //         delay: 2,
-        //         top: "0",
-        //     });
-        //     gsap.to(".socials", {
-        //         duration: 1,
-        //         delay: 2.5,
-        //         bottom: "10rem",
-        //     });
-        //     gsap.to(".scrollDown", {
-        //         duration: 1,
-        //         delay: 3,
-        //         bottom: "5.5rem",
-        //     });
+        imagesLoaded(document.querySelectorAll("img"), () => {
+            gsap.to(".loading", {
+                delay: 2,
+                duration: 2,
+                zIndex: 1,
+                background: "transparent",
+                opacity: 0.5,
+                pointerEvents: "none",
+            });
+            gsap.to(".loading__svg", {
+                delay: 2,
+                duration: 100,
+                rotate: "360deg",
+            });
+            gsap.to("header", {
+                duration: 1,
+                delay: 2,
+                top: "0",
+            });
+            gsap.to(".socials", {
+                duration: 1,
+                delay: 2.5,
+                bottom: "10rem",
+            });
+            gsap.to(".scrollDown", {
+                duration: 1,
+                delay: 3,
+                bottom: "5.5rem",
+            });
 
-        //     setTimeout(() => {
-        //         document.dispatchEvent(new CustomEvent("initSmoothScroll"));
-        //     }, 2000);
-        // });  
-        // return;
+            setTimeout(() => {
+                document.dispatchEvent(new CustomEvent("initSmoothScroll"));
+            }, 2000);
+        });  
+        return;
     }
 
     window.requestAnimationFrame(Interval);
