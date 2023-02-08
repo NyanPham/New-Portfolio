@@ -156,7 +156,7 @@
             <div class="me">
                 <div class="me__curve"></div>
                 <div class="me__infos">
-                    <img src="assets/images/me.jpg" alt="" class="me__img">
+                    <img src="assets/images/me.jpg" alt="My portrait" class="me__img">
                     <div class="me__col">
                         <div class="me__info">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="code"
@@ -196,10 +196,10 @@
                 <div class="swiper__tools">
                     <div class="swiper__buttons">
                         <button class="swiper-button-prev">
-                            <img src="assets/images/rightArrow.png" alt="">
+                            <img src="assets/images/rightArrow.png" alt="Left arrow button">
                         </button>
                         <button class="swiper-button-next">
-                            <img src="assets/images/rightArrow.png" alt="">
+                            <img src="assets/images/rightArrow.png" alt="Right arrow button">
                         </button>
                     </div>
                     <div class="swiper-pagination"></div>
@@ -768,18 +768,21 @@
                             <input type="text" name="full name" placeholder="Type here" required>
                         </div>
                         <div class="form__info">
-                            <label for="">I'm looking for</label>
-                            <input type="text" name="service" placeholder="Type of service" required>
-                        </div>
-                    </div>
+                            <label for="">You're looking for</label>
+                            <input type="text" name="service" placeholder="Question subject" required>
+                        </div>  
+                    </div>  
                     <div class="form__flex">
                         <div class="form__info">
                             <label for="">Your email address</label>
                             <input type="email" name="email" placeholder="Your email here" required>
                         </div>
-                    </div>
+                    </div>  
                     <div class="form__flex">
-                        <textarea name="message" placeholder="Your message" required></textarea>
+                        <div class="form__info dir-col">
+                            <label for="message">Have something to say?</label>
+                            <textarea name="message" id="message" placeholder="Your message" required></textarea>
+                        </div>
                     </div>
                     <div class="form__flex">
                         <div class="form__info">
@@ -867,14 +870,14 @@
                     </svg>
                 </a>
             </div>
-            <div class="contact__footer">
+            <div class="contact__footer">       
                 <div class="contact__footer-link">Pham Thanh Nhan</div>
                 <div class="contact__footer-link">&copy;&nbsp;Copyright 2023</div>
                 <div class="contact__footer-link">Have a nice day!</div>
             </div>  
         </div>
     </section>
-
+    
     <button class="scroll-to-top" id="scroll-to-top">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/></svg>
     </button>
@@ -899,8 +902,8 @@
                             nesciunt molestias porro dignissimos libero fugit, assumenda dolore in vitae culpa alias,
                             optio animi aut deserunt vel. Hic, porro.
                         </p>
-                    </div>
-                    <img src="assets/images/avatars/1.png" alt="" class="review__img" data-review-image>
+                    </div>  
+                    <img src="assets/images/avatars/1.png" alt="Reviewer's avatar" class="review__img" data-review-image>
                     <div class="review__profile">
                         <span data-review-name>Nhan Pham</span>
                         <span data-review-position>Web Developer</span>

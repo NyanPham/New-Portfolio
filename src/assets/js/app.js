@@ -39,4 +39,4 @@ function initBackToTopButton() {
         smoothScrollBar.scrollTo(0, 0, 1000);
         removeHashInURL();
     });
-}
+;}

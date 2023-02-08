@@ -87,6 +87,8 @@ export function initScrollBar() {
     pageSmoothScroll.addListener(({ offset }) => {
         updatePosition(scrollToTop, offset);
         updatePosition(header, offset);
+
+        updateScrollRatio(scrollToTop, offset);
     });
 
     return pageSmoothScroll;
@@ -96,5 +98,10 @@ function updatePosition(element, offset) {
     element.classList.toggle("show", offset.y > window.innerHeight / 2);
     element.style.setProperty("--raw-top", offset.y);
 }
+
+function updateScrollRatio(element, { y: offsetY }) {
+    const ratio = offsetY / document.body.scrollHeight;
+    element.style.setProperty('--percentage', (ratio + 0.1) * 100);
+}       
 
 export default Scrollbar;

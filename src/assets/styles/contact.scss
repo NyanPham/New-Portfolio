@@ -17,6 +17,10 @@
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 0.25rem;
+        
+        @media (max-width: 440px) {
+            gap: 1rem;
+        }
 
         &-item {
             position: relative;
@@ -99,6 +103,12 @@
             &:focus {
                 outline: none;
             }
+        }
+
+        &.dir-col {
+            flex-direction: column;
+            width: 100%;
+            align-items: start;
         }
     }
 
