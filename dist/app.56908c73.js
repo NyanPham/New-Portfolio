@@ -42000,6 +42000,8 @@ module.exports = "/duc-manh.d3206bd4.jpg";
 module.exports = "/tu-nguyen.7d7e32aa.jpg";
 },{}],"assets/images/avatars/hoanh.jpg":[function(require,module,exports) {
 module.exports = "/hoanh.88657d57.jpg";
+},{}],"assets/images/avatars/duy-hoang.jpg":[function(require,module,exports) {
+module.exports = "/duy-hoang.527ddda8.jpg";
 },{}],"assets/images/shapes/34.jpg":[function(require,module,exports) {
 module.exports = "/34.a9943b2a.jpg";
 },{}],"assets/images/me.jpg":[function(require,module,exports) {
@@ -42021,6 +42023,7 @@ var _duyNguyen = _interopRequireDefault(require("../images/avatars/duy-nguyen.jp
 var _ducManh = _interopRequireDefault(require("../images/avatars/duc-manh.jpg"));
 var _tuNguyen = _interopRequireDefault(require("../images/avatars/tu-nguyen.jpg"));
 var _hoanh = _interopRequireDefault(require("../images/avatars/hoanh.jpg"));
+var _duyHoang = _interopRequireDefault(require("../images/avatars/duy-hoang.jpg"));
 var _ = _interopRequireDefault(require("../images/shapes/34.jpg"));
 var _me = _interopRequireDefault(require("../images/me.jpg"));
 var _me2 = _interopRequireDefault(require("../images/me2.jpg"));
@@ -42033,6 +42036,7 @@ var images = {
   manhAvatar: _ducManh.default,
   tuAvatar: _tuNguyen.default,
   hoanhAvatar: _hoanh.default,
+  duyHoangAvatar: _duyHoang.default,
   bg: _.default,
   me1: _me.default,
   me2: _me2.default,
@@ -42040,7 +42044,7 @@ var images = {
 };
 var _default = images;
 exports.default = _default;
-},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.jpg":"assets/images/avatars/kieu-trinh.jpg","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/avatars/hoanh.jpg":"assets/images/avatars/hoanh.jpg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/js/threeBg.js":[function(require,module,exports) {
+},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.jpg":"assets/images/avatars/kieu-trinh.jpg","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/avatars/hoanh.jpg":"assets/images/avatars/hoanh.jpg","../images/avatars/duy-hoang.jpg":"assets/images/avatars/duy-hoang.jpg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/js/threeBg.js":[function(require,module,exports) {
 "use strict";
 
 var THREE = _interopRequireWildcard(require("three"));
@@ -51921,6 +51925,11 @@ var reviews = [{
   image: _images.default.duyAvatar,
   review: "Nhan is a super supportive partner at work and pretty social with us, especially Technical supporters who get stuck at complex bugs."
 }, {
+  name: "Duy Hoang",
+  position: "Project Leader",
+  image: _images.default.duyHoangAvatar,
+  review: "With a sharp logical thinking and a strong foundation, he plans things out clearly before starting any projects. He's also pretty perceptive and open to colleagues' advice. Innovation and creativity are his plus. However, a bit more of control over details is a nice point for him to improve."
+}, {
   name: "Duc Manh",
   position: "Technical Supporter",
   image: _images.default.manhAvatar,
@@ -58502,7 +58511,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58667" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49832" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

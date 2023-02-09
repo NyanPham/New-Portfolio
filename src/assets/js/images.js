@@ -4,6 +4,7 @@ import duyAvatar from "../images/avatars/duy-nguyen.jpeg";
 import manhAvatar from "../images/avatars/duc-manh.jpg";
 import tuAvatar from "../images/avatars/tu-nguyen.jpg";
 import hoanhAvatar from "../images/avatars/hoanh.jpg";
+import duyHoangAvatar from '../images/avatars/duy-hoang.jpg'
 import bg from "../images/shapes/34.jpg";   
 import me1 from "../images/me.jpg";
 import me2 from "../images/me2.jpg";
@@ -16,6 +17,7 @@ const images = {
     manhAvatar,
     tuAvatar,
     hoanhAvatar,
+    duyHoangAvatar,
     bg,
     me1,
     me2,

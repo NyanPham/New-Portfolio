@@ -19,6 +19,12 @@ let reviews = [
         image: images.duyAvatar,
         review: "Nhan is a super supportive partner at work and pretty social with us, especially Technical supporters who get stuck at complex bugs.",
     },
+    {               
+        name: "Duy Hoang",
+        position: "Project Leader",
+        image: images.duyHoangAvatar,
+        review: "With a sharp logical thinking and a strong foundation, he plans things out clearly before starting any projects. He's also pretty perceptive and open to colleagues' advice. Innovation and creativity are his plus. However, a bit more of control over details is a nice point for him to improve.",
+    },  
     {
         name: "Duc Manh",
         position: "Technical Supporter",
@@ -37,6 +43,7 @@ let reviews = [
         image: images.hoanhAvatar,
         review: "At work, he's really perceptive and a fast learner. In spite of not having graduated from any IT university, he's managed to transition to the programming field, which means he has a strong self-learning manner. Nhan is also detail-oriented and supportive to others. However, he's easy to get stressed somtimes, so I hope he would be able to deal with it in the future.",
     },
+    
 ];
 
 export { reviews };

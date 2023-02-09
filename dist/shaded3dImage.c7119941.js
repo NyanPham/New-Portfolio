@@ -36162,6 +36162,8 @@ module.exports = "/duc-manh.d3206bd4.jpg";
 module.exports = "/tu-nguyen.7d7e32aa.jpg";
 },{}],"assets/images/avatars/hoanh.jpg":[function(require,module,exports) {
 module.exports = "/hoanh.88657d57.jpg";
+},{}],"assets/images/avatars/duy-hoang.jpg":[function(require,module,exports) {
+module.exports = "/duy-hoang.527ddda8.jpg";
 },{}],"assets/images/shapes/34.jpg":[function(require,module,exports) {
 module.exports = "/34.a9943b2a.jpg";
 },{}],"assets/images/me.jpg":[function(require,module,exports) {
@@ -36183,6 +36185,7 @@ var _duyNguyen = _interopRequireDefault(require("../images/avatars/duy-nguyen.jp
 var _ducManh = _interopRequireDefault(require("../images/avatars/duc-manh.jpg"));
 var _tuNguyen = _interopRequireDefault(require("../images/avatars/tu-nguyen.jpg"));
 var _hoanh = _interopRequireDefault(require("../images/avatars/hoanh.jpg"));
+var _duyHoang = _interopRequireDefault(require("../images/avatars/duy-hoang.jpg"));
 var _ = _interopRequireDefault(require("../images/shapes/34.jpg"));
 var _me = _interopRequireDefault(require("../images/me.jpg"));
 var _me2 = _interopRequireDefault(require("../images/me2.jpg"));
@@ -36195,6 +36198,7 @@ var images = {
   manhAvatar: _ducManh.default,
   tuAvatar: _tuNguyen.default,
   hoanhAvatar: _hoanh.default,
+  duyHoangAvatar: _duyHoang.default,
   bg: _.default,
   me1: _me.default,
   me2: _me2.default,
@@ -36202,7 +36206,7 @@ var images = {
 };
 var _default = images;
 exports.default = _default;
-},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.jpg":"assets/images/avatars/kieu-trinh.jpg","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/avatars/hoanh.jpg":"assets/images/avatars/hoanh.jpg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/shaders/vertex.glsl":[function(require,module,exports) {
+},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.jpg":"assets/images/avatars/kieu-trinh.jpg","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/avatars/hoanh.jpg":"assets/images/avatars/hoanh.jpg","../images/avatars/duy-hoang.jpg":"assets/images/avatars/duy-hoang.jpg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/shaders/vertex.glsl":[function(require,module,exports) {
 module.exports = "#define GLSLIFY 1\nuniform sampler2D uTexture;\nuniform vec2 uOffset;\nvarying vec2 vUv;\n\nfloat M_PI = 3.141529;\n\nvec3 deformationCurve(vec3 position, vec2 uv, vec2 offset) \n{\n    position.x = position.x + (sin(uv.y * M_PI) * offset.x);\n    position.y = position.y + (sin(uv.x * M_PI) * offset.y);\n    return position;\n}\n\nvoid main() \n{\n    vUv = uv;\n    vec3 newPosition = deformationCurve(position, uv, uOffset);\n    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);\n}";
 },{}],"assets/shaders/fragment.glsl":[function(require,module,exports) {
 module.exports = "#define GLSLIFY 1\nuniform sampler2D uTexture;\nuniform float uAlpha;\nuniform vec2 uOffset;\nvarying vec2 vUv;\n\nvec3 rgbShift(sampler2D textureImage, vec2 uv, vec2 offset)\n{\n    float r = texture2D(textureImage, uv + offset).r;\n    vec2 gb = texture2D(textureImage, uv).gb;\n    return vec3(r, gb);\n}\n\nvoid main() \n{\n    vec3 color = rgbShift(uTexture, vUv, uOffset);\n    gl_FragColor = vec4(color, uAlpha);\n}";
@@ -36406,7 +36410,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58667" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49832" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
