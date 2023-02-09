@@ -43,7 +43,6 @@ let reviews = [
         image: images.hoanhAvatar,
         review: "At work, he's really perceptive and a fast learner. In spite of not having graduated from any IT university, he's managed to transition to the programming field, which means he has a strong self-learning manner. Nhan is also detail-oriented and supportive to others. However, he's easy to get stressed somtimes, so I hope he would be able to deal with it in the future.",
     },
-    
 ];
 
 export { reviews };
