@@ -2,10 +2,40 @@
     z-index: 2;
     &__header {
         font-size: 60px;
-        font-style: itaic;
+        font-style: italic;
         padding-bottom: 10px;
+        --reveal-delay: 0.3s;
+
+        opacity: 0;
+        -webkit-transform: rotateX(75deg) rotateY(10deg) rotateZ(-9deg);
+        transform: rotateX(75deg) rotateY(10deg) rotateZ(-9deg);
+        -webkit-transform-origin: top;
+        transform-origin: top;  
+        -webkit-transition: opacity .1s cubic-bezier(.165,.84,.44,1),-webkit-transform 0s cubic-bezier(.165,.84,.44,1) .1s;
+        transition: opacity .1s cubic-bezier(.165,.84,.44,1),-webkit-transform 0s cubic-bezier(.165,.84,.44,1) .1s;
+        -o-transition: opacity .1s cubic-bezier(.165,.84,.44,1),transform 0s cubic-bezier(.165,.84,.44,1) .1s;
+        transition: opacity .1s cubic-bezier(.165,.84,.44,1),transform 0s cubic-bezier(.165,.84,.44,1) .1s;
+        transition: opacity .1s cubic-bezier(.165,.84,.44,1),transform 0s cubic-bezier(.165,.84,.44,1) .1s,-webkit-transform 0s cubic-bezier(.165,.84,.44,1) .1s;
+        position: relative;
+        display: inline-block;
+
+        &[data-has-intersected=true] {
+            & {
+                -webkit-transition: opacity 1s cubic-bezier(.165,.84,.44,1) var(--reveal-delay),-webkit-transform 1s cubic-bezier(.165,.84,.44,1) var(--reveal-delay);
+                transition: opacity 1s cubic-bezier(.165,.84,.44,1) var(--reveal-delay),-webkit-transform 1s cubic-bezier(.165,.84,.44,1) var(--reveal-delay);
+                -o-transition: opacity 1s cubic-bezier(.165,.84,.44,1) var(--reveal-delay),transform 1s cubic-bezier(.165,.84,.44,1) var(--reveal-delay);
+                transition: opacity 1s cubic-bezier(.165,.84,.44,1) var(--reveal-delay),transform 1s cubic-bezier(.165,.84,.44,1) var(--reveal-delay);
+                transition: opacity 1s cubic-bezier(.165,.84,.44,1) var(--reveal-delay),transform 1s cubic-bezier(.165,.84,.44,1) var(--reveal-delay),-webkit-transform .7s cubic-bezier(.165,.84,.44,1) var(--reveal-delay);
+                opacity: 1;
+                -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+                transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            }
+        }   
     }
 }
+
+
+
 
 .project {
     &__header {
@@ -32,11 +62,35 @@
             align-items: center;
             font-weight: 400;
 
+            --reveal-delay: 100ms;
+            --reveal-translate-distance: 1.5vh;
+
+            opacity: 0;
+            -webkit-transform: translateY(var(--reveal-translate-distance));
+            transform: translateY(var(--reveal-translate-distance));
+            -webkit-transition: opacity .3s cubic-bezier(.645,.045,.355,1),-webkit-transform .6s cubic-bezier(.645,.045,.355,1);
+            transition: opacity .3s cubic-bezier(.645,.045,.355,1),-webkit-transform .6s cubic-bezier(.645,.045,.355,1);
+            -o-transition: transform .6s cubic-bezier(.645,.045,.355,1),opacity .3s cubic-bezier(.645,.045,.355,1);
+            transition: transform .6s cubic-bezier(.645,.045,.355,1),opacity .3s cubic-bezier(.645,.045,.355,1);
+            transition: transform .6s cubic-bezier(.645,.045,.355,1),opacity .3s cubic-bezier(.645,.045,.355,1),-webkit-transform .6s cubic-bezier(.645,.045,.355,1);
+            -webkit-transition-delay: var(--reveal-delay);
+            -o-transition-delay: var(--reveal-delay);
+            transition-delay: var(--reveal-delay);
+
             span {
                 margin-left: 0.5rem;
             }
         }
+    }
 
+    &[data-has-intersected=true] {
+        .project__infos {
+            &--name {
+                opacity: 1;
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+            }
+        }   
     }
 
     &__img {

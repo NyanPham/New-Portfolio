@@ -3,12 +3,14 @@ import initSwiper from "./swiper.js";
 import { initScrollBar } from "./smoothScroll.js";
 import "./faq.js";
 import "./scrollDown.js";
+import RevealSelf from "./revealSelf.js";
 
 StartLoading();
 initSwiper();
 initBackToTopButton();
 RunAnimationWhenInView();
-
+    
+new RevealSelf();
 let smoothScrollBar;
 
 document.addEventListener("initSmoothScroll", () => {
