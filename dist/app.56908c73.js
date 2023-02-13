@@ -42002,6 +42002,8 @@ module.exports = "/tu-nguyen.7d7e32aa.jpg";
 module.exports = "/hoanh.88657d57.jpg";
 },{}],"assets/images/avatars/duy-hoang.jpg":[function(require,module,exports) {
 module.exports = "/duy-hoang.527ddda8.jpg";
+},{}],"assets/images/avatars/long-designer.jpg":[function(require,module,exports) {
+module.exports = "/long-designer.9cfd3c0b.jpg";
 },{}],"assets/images/shapes/34.jpg":[function(require,module,exports) {
 module.exports = "/34.a9943b2a.jpg";
 },{}],"assets/images/me.jpg":[function(require,module,exports) {
@@ -42024,6 +42026,7 @@ var _ducManh = _interopRequireDefault(require("../images/avatars/duc-manh.jpg"))
 var _tuNguyen = _interopRequireDefault(require("../images/avatars/tu-nguyen.jpg"));
 var _hoanh = _interopRequireDefault(require("../images/avatars/hoanh.jpg"));
 var _duyHoang = _interopRequireDefault(require("../images/avatars/duy-hoang.jpg"));
+var _longDesigner = _interopRequireDefault(require("../images/avatars/long-designer.jpg"));
 var _ = _interopRequireDefault(require("../images/shapes/34.jpg"));
 var _me = _interopRequireDefault(require("../images/me.jpg"));
 var _me2 = _interopRequireDefault(require("../images/me2.jpg"));
@@ -42037,6 +42040,7 @@ var images = {
   tuAvatar: _tuNguyen.default,
   hoanhAvatar: _hoanh.default,
   duyHoangAvatar: _duyHoang.default,
+  longAvatar: _longDesigner.default,
   bg: _.default,
   me1: _me.default,
   me2: _me2.default,
@@ -42044,7 +42048,7 @@ var images = {
 };
 var _default = images;
 exports.default = _default;
-},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.jpg":"assets/images/avatars/kieu-trinh.jpg","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/avatars/hoanh.jpg":"assets/images/avatars/hoanh.jpg","../images/avatars/duy-hoang.jpg":"assets/images/avatars/duy-hoang.jpg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/js/threeBg.js":[function(require,module,exports) {
+},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.jpg":"assets/images/avatars/kieu-trinh.jpg","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/avatars/hoanh.jpg":"assets/images/avatars/hoanh.jpg","../images/avatars/duy-hoang.jpg":"assets/images/avatars/duy-hoang.jpg","../images/avatars/long-designer.jpg":"assets/images/avatars/long-designer.jpg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/js/threeBg.js":[function(require,module,exports) {
 "use strict";
 
 var THREE = _interopRequireWildcard(require("three"));
@@ -51944,6 +51948,11 @@ var reviews = [{
   position: "HR Department",
   image: _images.default.hoanhAvatar,
   review: "At work, he's really perceptive and a fast learner. In spite of not having graduated from any IT university, he's managed to transition to the programming field, which means he has a strong self-learning manner. Nhan is also detail-oriented and supportive to others. However, he's easy to get stressed somtimes, so I hope he would be able to deal with it in the future."
+}, {
+  name: "Long Hoang",
+  position: "Designer",
+  image: _images.default.longAvatar,
+  review: "At workplace, he works hard and take opportunities to learn new things. With a sharp mind, he proves to be a deep-thinking colleague. Deadlines seem to be his friends. He's also very social, supportive to others. In general, he's respective, kind and not dramatic. Neverthless, he seems to be shy at contributing his opinions to solve problems with others"
 }];
 exports.reviews = reviews;
 },{"./images":"assets/js/images.js"}],"assets/js/swiper.js":[function(require,module,exports) {
@@ -58571,7 +58580,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49214" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56574" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

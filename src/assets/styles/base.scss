@@ -75,6 +75,24 @@ $background-light-blue: #edf2f7;
             font-weight: 400;
             font-size: 17px;
             color: #666;
+
+            -webkit-transition-property: opacity;
+            -o-transition-property: opacity;
+            transition-property: opacity;
+            -webkit-transition-timing-function: cubic-bezier(.455,.03,.515,.955);
+            -o-transition-timing-function: cubic-bezier(.455,.03,.515,.955);
+            transition-timing-function: cubic-bezier(.455,.03,.515,.955);
+            -webkit-transition-duration: .1s;
+            -o-transition-duration: .1s;
+            transition-duration: .1s;
+            opacity: 0;    
+            
+            &[data-has-intersected=true] {
+                -webkit-transition-duration: .3s;
+                -o-transition-duration: .3s;
+                transition-duration: .3s;
+                opacity: 1;
+            }   
         }
 
         &-subtitle {
