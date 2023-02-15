@@ -42004,6 +42004,8 @@ module.exports = "/hoanh.88657d57.jpg";
 module.exports = "/duy-hoang.527ddda8.jpg";
 },{}],"assets/images/avatars/long-designer.jpg":[function(require,module,exports) {
 module.exports = "/long-designer.9cfd3c0b.jpg";
+},{}],"assets/images/avatars/phi-anh.jpg":[function(require,module,exports) {
+module.exports = "/phi-anh.a0ccd5ae.jpg";
 },{}],"assets/images/shapes/34.jpg":[function(require,module,exports) {
 module.exports = "/34.a9943b2a.jpg";
 },{}],"assets/images/me.jpg":[function(require,module,exports) {
@@ -42027,6 +42029,7 @@ var _tuNguyen = _interopRequireDefault(require("../images/avatars/tu-nguyen.jpg"
 var _hoanh = _interopRequireDefault(require("../images/avatars/hoanh.jpg"));
 var _duyHoang = _interopRequireDefault(require("../images/avatars/duy-hoang.jpg"));
 var _longDesigner = _interopRequireDefault(require("../images/avatars/long-designer.jpg"));
+var _phiAnh = _interopRequireDefault(require("../images/avatars/phi-anh.jpg"));
 var _ = _interopRequireDefault(require("../images/shapes/34.jpg"));
 var _me = _interopRequireDefault(require("../images/me.jpg"));
 var _me2 = _interopRequireDefault(require("../images/me2.jpg"));
@@ -42041,6 +42044,7 @@ var images = {
   hoanhAvatar: _hoanh.default,
   duyHoangAvatar: _duyHoang.default,
   longAvatar: _longDesigner.default,
+  phiAnhAvatar: _phiAnh.default,
   bg: _.default,
   me1: _me.default,
   me2: _me2.default,
@@ -42048,7 +42052,7 @@ var images = {
 };
 var _default = images;
 exports.default = _default;
-},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.jpg":"assets/images/avatars/kieu-trinh.jpg","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/avatars/hoanh.jpg":"assets/images/avatars/hoanh.jpg","../images/avatars/duy-hoang.jpg":"assets/images/avatars/duy-hoang.jpg","../images/avatars/long-designer.jpg":"assets/images/avatars/long-designer.jpg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/js/threeBg.js":[function(require,module,exports) {
+},{"../images/avatars/van-khanh.jpg":"assets/images/avatars/van-khanh.jpg","../images/avatars/kieu-trinh.jpg":"assets/images/avatars/kieu-trinh.jpg","../images/avatars/duy-nguyen.jpeg":"assets/images/avatars/duy-nguyen.jpeg","../images/avatars/duc-manh.jpg":"assets/images/avatars/duc-manh.jpg","../images/avatars/tu-nguyen.jpg":"assets/images/avatars/tu-nguyen.jpg","../images/avatars/hoanh.jpg":"assets/images/avatars/hoanh.jpg","../images/avatars/duy-hoang.jpg":"assets/images/avatars/duy-hoang.jpg","../images/avatars/long-designer.jpg":"assets/images/avatars/long-designer.jpg","../images/avatars/phi-anh.jpg":"assets/images/avatars/phi-anh.jpg","../images/shapes/34.jpg":"assets/images/shapes/34.jpg","../images/me.jpg":"assets/images/me.jpg","../images/me2.jpg":"assets/images/me2.jpg","../images/me3.jpg":"assets/images/me3.jpg"}],"assets/js/threeBg.js":[function(require,module,exports) {
 "use strict";
 
 var THREE = _interopRequireWildcard(require("three"));
@@ -51919,6 +51923,21 @@ var reviews = [{
   image: _images.default.khanhAvatar,
   review: "He's so gentle, patient and taciturn. That's his best points of being a developer. If his patience and gentleness are put in the right place, he can sky rocket his capabilities. However, he's still pretty shy when socializing with others. He doesn't show off, but I hope he could be more self-confident. Last words, I really admire his practical programming skills and knowledge despite of his unmatched Bachelor's degree."
 }, {
+  name: "Phi Anh",
+  position: "Project Leader",
+  image: _images.default.phiAnhAvatar,
+  review: "His code is at high quality in terms of readibility and problem solving. He's pretty kind, taciturn and supportive to other, especially the Technical Supporters. However, he still has some work cut out to optimize his code for the best performance, which I believe he definitely will improve in future."
+}, {
+  name: "Long Hoang",
+  position: "Designer",
+  image: _images.default.longAvatar,
+  review: "At workplace, he works hard and take opportunities to learn new things. With a sharp mind, he proves to be a deep-thinking colleague. Deadlines seem to be his friends. He's also very social, supportive to others. In general, he's respective, kind and not dramatic. Neverthless, he seems to be shy at contributing his opinions to solve problems with others"
+}, {
+  name: "Duy Hoang",
+  position: "Project Leader",
+  image: _images.default.duyHoangAvatar,
+  review: "With a sharp logical thinking and a strong foundation, he plans things out clearly before starting any projects. He's also pretty perceptive and open to colleagues' advice. Innovation and creativity are his plus. However, a bit more of control over details is a nice point for him to improve."
+}, {
   name: "Trinh",
   position: "Technical Supporter",
   image: _images.default.trinhAvatar,
@@ -51928,11 +51947,6 @@ var reviews = [{
   position: "Technical Supporter",
   image: _images.default.duyAvatar,
   review: "Nhan is a super supportive partner at work and pretty social with us, especially Technical supporters who get stuck at complex bugs."
-}, {
-  name: "Duy Hoang",
-  position: "Project Leader",
-  image: _images.default.duyHoangAvatar,
-  review: "With a sharp logical thinking and a strong foundation, he plans things out clearly before starting any projects. He's also pretty perceptive and open to colleagues' advice. Innovation and creativity are his plus. However, a bit more of control over details is a nice point for him to improve."
 }, {
   name: "Duc Manh",
   position: "Technical Supporter",
@@ -51948,11 +51962,6 @@ var reviews = [{
   position: "HR Department",
   image: _images.default.hoanhAvatar,
   review: "At work, he's really perceptive and a fast learner. In spite of not having graduated from any IT university, he's managed to transition to the programming field, which means he has a strong self-learning manner. Nhan is also detail-oriented and supportive to others. However, he's easy to get stressed somtimes, so I hope he would be able to deal with it in the future."
-}, {
-  name: "Long Hoang",
-  position: "Designer",
-  image: _images.default.longAvatar,
-  review: "At workplace, he works hard and take opportunities to learn new things. With a sharp mind, he proves to be a deep-thinking colleague. Deadlines seem to be his friends. He's also very social, supportive to others. In general, he's respective, kind and not dramatic. Neverthless, he seems to be shy at contributing his opinions to solve problems with others"
 }];
 exports.reviews = reviews;
 },{"./images":"assets/js/images.js"}],"assets/js/swiper.js":[function(require,module,exports) {
@@ -58580,7 +58589,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56574" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54069" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
