@@ -58,8 +58,8 @@
             &__infos {
                 display: flex;
                 align-items: center;
-                gap: 15px;
-                font-size: 17px;
+                gap: 1rem;
+                font-size: 1.25rem;
                 font-family: sans-serif;
             }
                 
@@ -79,6 +79,8 @@
                 flex-direction: column;
                 gap: 5px;
                 padding-right: 1.2rem;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
             }
 
             &__info {
@@ -269,7 +271,7 @@
 }
 
 .swiper-slide {
-    filter: blur(2px) !important;
+    // filter: blur(2px) !important;
     transform: scale(0.8);
     transition: all 0.2s ease;
 

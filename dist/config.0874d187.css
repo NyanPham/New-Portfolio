@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -76,7 +76,7 @@ ul {
   font-size: 27px;
   font-weight: 700;
 }
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -206,6 +206,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
 }
 @media (max-width: 355px) {
   .loading__text {
@@ -217,13 +218,21 @@ ul {
   height: 15px;
   margin: 0 3px;
   border-radius: 50%;
-  background: #fff;
+  display: grid;
+  place-items: center;
+}
+.loading__text--dot svg {
+  fill: white;
+  width: 100%;
+  height: 100%;
+  margin-top: 0.25rem;
+  transform: rotate(180deg);
   animation: pulse 1s infinite;
 }
 @keyframes pulse {
   from {
     opacity: 0;
-    background: #6cff8d;
+    fill: #6cff8d;
   }
   to {
     opacity: 1;
@@ -273,7 +282,7 @@ ul {
   width: 85%;
   opacity: 0;
 }
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -513,7 +522,6 @@ ul {
   height: 60%;
   z-index: 2;
   color: #fff;
-  font-family: "Dancing Script", cursive;
 }
 .intro h4 {
   font-size: 33px;
@@ -601,7 +609,7 @@ ul {
   transition: fill 0.5s ease-in-out;
   z-index: 1;
 }
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -879,7 +887,7 @@ ul {
   stroke-dashoffset: 0;
   transition-timing-function: cubic-bezier(0.8, 1, 0.7, 1);
 }
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -1021,7 +1029,7 @@ ul {
     top: 10rem;
   }
 }
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Orbitron&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -1151,8 +1159,8 @@ ul {
 .reviews__header .me__infos {
   display: flex;
   align-items: center;
-  gap: 15px;
-  font-size: 17px;
+  gap: 1rem;
+  font-size: 1.25rem;
   font-family: sans-serif;
 }
 .reviews__header .me__img {
@@ -1169,6 +1177,8 @@ ul {
   flex-direction: column;
   gap: 5px;
   padding-right: 1.2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .reviews__header .me__info {
   display: flex;
@@ -1333,7 +1343,6 @@ ul {
 }
 
 .swiper-slide {
-  filter: blur(2px) !important;
   transform: scale(0.8);
   transition: all 0.2s ease;
 }
