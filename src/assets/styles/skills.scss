@@ -1,6 +1,8 @@
 @import "./base.scss";
 
 .skills {
+    $animation-speed: 25s;
+
     position: relative;
     font-size: 34px;
     height: 300px;
@@ -26,9 +28,9 @@
             top: 7rem;
            
             &.in-view {
-                animation: moveLeft 15s linear infinite;
+                animation: moveLeft $animation-speed linear infinite;
             }
-
+                                
             @keyframes moveLeft {
                 0% {
                     transform: translate3d(0, 0, 0);
@@ -43,7 +45,7 @@
             top: 12rem;
 
             &.in-view {
-                animation: moveRight 15s linear infinite;
+                animation: moveRight $animation-speed linear infinite;
             }
 
             @keyframes moveRight {

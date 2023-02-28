@@ -9,7 +9,7 @@ StartLoading();
 initSwiper();
 initBackToTopButton();
 RunAnimationWhenInView();
-    
+
 new RevealSelf();
 let smoothScrollBar;
 
@@ -41,4 +41,4 @@ function initBackToTopButton() {
         smoothScrollBar.scrollTo(0, 0, 1000);
         removeHashInURL();
     });
-;}
+}

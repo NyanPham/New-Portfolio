@@ -42132,6 +42132,10 @@ var _threeBg = require("./threeBg");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var bar = document.querySelector("[data-loading-bar-inner]");
 var counter_num = document.querySelector("[data-loading-counter-number]");
+var filterStrength = 20;
+var frameTime = 0,
+  lastLoop = new Date(),
+  thisLoop;
 var c = 0;
 function StartLoading() {
   window.requestAnimationFrame(Interval);
@@ -42142,6 +42146,9 @@ function Interval() {
   c++;
   if (c === 101) {
     removeHashInURL();
+    var thisFrameTime = (thisLoop = new Date()) - lastLoop;
+    frameTime += (thisFrameTime - frameTime) / filterStrength;
+    lastLoop = thisLoop;
     _gsap.default.to(".loading__bar", {
       duration: 5,
       rotate: "90deg",
@@ -42194,6 +42201,7 @@ function Interval() {
         delay: 3,
         bottom: "5.5rem"
       });
+      if ((1000 / frameTime).toFixed(1) >= 45) {}
       setTimeout(function () {
         document.dispatchEvent(new CustomEvent("initSmoothScroll"));
       }, 2000);
@@ -58562,7 +58570,6 @@ function initBackToTopButton() {
     smoothScrollBar.scrollTo(0, 0, 1000);
     (0, _loader.removeHashInURL)();
   });
-  ;
 }
 },{"./loader.js":"assets/js/loader.js","./swiper.js":"assets/js/swiper.js","./smoothScroll.js":"assets/js/smoothScroll.js","./faq.js":"assets/js/faq.js","./scrollDown.js":"assets/js/scrollDown.js","./revealSelf.js":"assets/js/revealSelf.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -58589,7 +58596,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54314" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51499" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

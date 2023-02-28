@@ -4,6 +4,11 @@ import { setBackgroundInView } from "./threeBg";
 
 const bar = document.querySelector("[data-loading-bar-inner]");
 const counter_num = document.querySelector("[data-loading-counter-number]");
+const filterStrength = 20;
+
+let frameTime = 0,
+    lastLoop = new Date(),
+    thisLoop;
 
 let c = 0;
 
@@ -17,6 +22,10 @@ function Interval() {
     c++;
     if (c === 101) {
         removeHashInURL();
+
+        const thisFrameTime = (thisLoop = new Date()) - lastLoop;
+        frameTime += (thisFrameTime - frameTime) / filterStrength;
+        lastLoop = thisLoop;
 
         gsap.to(".loading__bar", {
             duration: 5,
@@ -72,10 +81,13 @@ function Interval() {
                 bottom: "5.5rem",
             });
 
+            if ((1000 / frameTime).toFixed(1) >= 45) {
+            }
+
             setTimeout(() => {
                 document.dispatchEvent(new CustomEvent("initSmoothScroll"));
             }, 2000);
-        });  
+        });
         return;
     }
 
